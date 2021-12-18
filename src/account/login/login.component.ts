@@ -53,12 +53,12 @@ export class LoginComponent extends AppComponentBase {
       this.authenService.requestTypeStatus = rs.requestTypeStatus
 
 
-    
       localStorage.setItem("userName", rs.userName)
       localStorage.setItem("userToken", rs.jwtToken)
       localStorage.setItem("userId", rs.id)
       localStorage.setItem("requestTypeStatus", rs.requestTypeStatus)
       localStorage.setItem("clubMember", rs.clubmember)
+      localStorage.setItem("eventmember", rs.eventmember)
       localStorage.setItem("userRole", rs.role)
       localStorage.setItem("accountName", rs.fullName)
       this.processLogin = false
@@ -102,6 +102,8 @@ export class LoginComponent extends AppComponentBase {
       localStorage.setItem("clubMember", rs.clubmember)
       localStorage.setItem("userRole", rs.role)
       localStorage.setItem("accountName", rs.fullName)
+      localStorage.setItem("eventmember", rs.eventmember)
+
       this.processLogin = false
     },
       () => {

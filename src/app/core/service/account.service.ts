@@ -17,7 +17,7 @@ export class AccountService extends BaseApiService {
     return 'api/icpdp/';
   }
   getAllAccount(): Observable<any> {
-    return this.http.get(this.rootUrl + "ListAllAccount",this.httpOptions)
+    return this.http.get(this.rootUrl + "ListAllStaffAccount",this.httpOptions)
   }
   public handleError(error: any) {
     if (error.status == 401) {

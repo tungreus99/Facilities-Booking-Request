@@ -18,31 +18,70 @@ import { catchError } from 'rxjs/operators';
 
 })
 export class HomeComponent extends AppComponentBase {
+  listBackground = [
+    {
+      event: "Spring",
+      url: "url('../../assets/img/FPT_AERIAL-01_20171109.jpg')"
+    },
+    {
+      event: "Summer",
+      url: "url('../../assets/img/FPT_AERIAL-01_20171109.jpg')"
+    },
+    {
+      event: "Autumn",
+      url: "url('../../assets/img/FPT_AERIAL-01_20171109.jpg')"
+    },
+    {
+      event: "Winter",
+      url: "url('../../assets/img/winter.jpg')"
+    }
+  ]
+  backgroundImg: string = ""
   totalRequest: number = 0
   requestList: RequestDto[] = []
   requestListByDate: RequestDto[] = []
   pendingPageNum: number = 1
   confirmPagNum: number = 1
   allowMonthRequest: boolean = false
-  allowBookEvent:boolean =false
+  allowBookEvent: boolean = false
+  currentMonth: number = new Date().getMonth()
   constructor(injector: Injector, private homeService: HomeService, private dialog: MatDialog, private router: Router, public authenService: AuthenticateService) {
     super(injector);
     authenService.userId = Number(localStorage.getItem("userId"))
   }
   ngOnInit(): void {
+    this.backgroundImg = this.listBackground.find(item => item.event == this.getBackgroundByEvent()).url
     this.getRequestist()
     this.getRequestByDate()
-    this.allowMonthRequest = localStorage.getItem("requestTypeStatus")=="true"?true:false
-    this.allowBookEvent = localStorage.getItem("clubMember")=="true"?true:false
-
-
+    this.allowMonthRequest = localStorage.getItem("requestTypeStatus") == "true" ? true : false
+    this.allowBookEvent = localStorage.getItem("clubMember") == "true" ? true : false
+  }
+  getBackgroundByEvent(): string {
+    switch (this.currentMonth) {
+      case 1:
+      case 2:
+      case 3:
+        return "Spring"
+      case 4:
+      case 5:
+      case 6:
+        return "Summer"
+      case 7:
+      case 8:
+      case 9:
+        return "Autumn"
+      case 10:
+      case 11:
+      case 12:
+        return "Winter"
+    }
   }
   getRequestist() {
     this.homeService.getRequestByAccount(this.authenService.userId).pipe(catchError(this.homeService.handleError)).subscribe(data => {
       this.requestList = data
       this.totalRequest = data.length
-    }, (err)=>{
-      if(err == "401"){
+    }, (err) => {
+      if (err == "401") {
         this.router.navigate(["account/login"])
       }
     })
@@ -74,44 +113,44 @@ export class HomeComponent extends AppComponentBase {
       (result: boolean) => {
         if (result) {
           request.requestDetailStatus = "CONFIRMED"
-          this.homeService.updateRequestDetailStatus(request.id,request).pipe(catchError(this.homeService.handleError)).subscribe(rs=>{
+          this.homeService.updateRequestDetailStatus(request.id, request).pipe(catchError(this.homeService.handleError)).subscribe(rs => {
             abp.notify.success("Confirm successful")
             this.getRequestByDate()
           },
-          (err) =>{
-            if(err == "401"){
-              this.router.navigate(["account/login"])
-            }
-            else{
-              abp.notify.success("Confirm successful")
-              this.getRequestByDate()
-            }
-           
+            (err) => {
+              if (err == "401") {
+                this.router.navigate(["account/login"])
+              }
+              else {
+                abp.notify.success("Confirm successful")
+                this.getRequestByDate()
+              }
 
-          })
+
+            })
         }
       }
     );
   }
- 
+
   getRequestByDate() {
-    let tomorrow  = moment().add(1,'days').format("YYYY-MM-DD");
-   
+    let tomorrow = moment().add(1, 'days').format("YYYY-MM-DD");
+
     this.homeService.getRequestDetailByDate(tomorrow).pipe(catchError(this.homeService.handleError)).subscribe(data => {
       this.requestListByDate = data
-      this.requestListByDate = this.requestListByDate.filter(item=>item.requestDetailStatus=="Open" && item.request.status =="APPROVED")
+      this.requestListByDate = this.requestListByDate.filter(item => item.requestDetailStatus == "Open" && item.request.status == "APPROVED")
     },
-    
-    (err)=>{
-      if(err == "401"){
-        this.router.navigate(["account/login"])
+
+      (err) => {
+        if (err == "401") {
+          this.router.navigate(["account/login"])
+        }
       }
-    }
-    
+
     )
   }
- 
-  closeRequest(request){
+
+  closeRequest(request) {
 
     let message: string = ""
     message = `${request.facility.facilityName} vào ${request.timeUsing} ngày ${moment(request.useDate).format("DD/MM/YYYY")}`
@@ -121,26 +160,26 @@ export class HomeComponent extends AppComponentBase {
       (result: boolean) => {
         if (result) {
           request.requestDetailStatus = "CLOSE"
-          this.homeService.updateRequestDetailStatus(request.id,request).pipe(catchError(this.homeService.handleError)).subscribe(rs=>{
+          this.homeService.updateRequestDetailStatus(request.id, request).pipe(catchError(this.homeService.handleError)).subscribe(rs => {
             abp.notify.success("Closed request")
             this.getRequestByDate()
           },
-          (err)=>{
-            if(err == "401"){
-              this.router.navigate(["account/login"])
-            }
-            else{
-              abp.notify.success("Closed request")
-              this.getRequestByDate()
-            }
-          
-          })
+            (err) => {
+              if (err == "401") {
+                this.router.navigate(["account/login"])
+              }
+              else {
+                abp.notify.success("Closed request")
+                this.getRequestByDate()
+              }
+
+            })
         }
       }
     );
   }
-  report(){
-    this.dialog.open(ReportDialogComponent,{
+  report() {
+    this.dialog.open(ReportDialogComponent, {
       width: "800px"
     })
   }

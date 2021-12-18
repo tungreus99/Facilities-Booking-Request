@@ -133,8 +133,7 @@ import { SROManagementComponent } from './modules/sro-management/sro-management.
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('879411761479-734qv2e2efi9f68utvo8catolkcfbe47.apps.googleusercontent.com'
-            ),
+            provider: new GoogleLoginProvider('383904693502-irfatk6brc55lt0lvle8i5abn0cf19qe.apps.googleusercontent.com')
           },
         ],
       } as SocialAuthServiceConfig,

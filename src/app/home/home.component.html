@@ -1,4 +1,4 @@
-﻿<div [@routerTransition] class="main-content">
+﻿<div [@routerTransition] class="main-content" [ngStyle]="{'background': backgroundImg, 'background-position': 'center', 'background-size': 'cover'}">
 
     <section class="content-header">
       <div class="container-fluid">
@@ -23,7 +23,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="w-80" *ngIf="authenService.clubMember">
+                <div class="w-80" *ngIf="authenService.clubMember ">
                   <div class="small-box ">
   
                     <button class="btn btn-primary w-100 text-left bg-orange special" [disabled]="!allowMonthRequest"
@@ -45,7 +45,7 @@
                   <div class="small-box">
   
   
-                    <button class="btn btn-primary w-100 text-left  bg-orange text-white special" *ngIf="allowBookEvent"
+                    <button class="btn btn-primary w-100 text-left  bg-orange text-white special" *ngIf="allowBookEvent || authenService.eventMember"
                     (click)="createRequest('Event')">
                     Add booking request for Event
                     <i class="fas fa-plus fa-lg float-right mt-2"></i>

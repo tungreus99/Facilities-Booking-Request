@@ -15,7 +15,7 @@ export class AppComponent extends AppComponentBase implements OnInit {
     private renderer: Renderer2,
     private _layoutStore: LayoutStoreService, private authenService: AuthenticateService
   ) {
-    super(injector);
+    super(injector); 
   }
 
   ngOnInit(): void {
@@ -38,6 +38,11 @@ export class AppComponent extends AppComponentBase implements OnInit {
     if(localStorage.getItem("userName")){
       this.authenService.userName = localStorage.getItem("userName")
     }
+    if(localStorage.getItem("eventmember")){
+      this.authenService.eventMember = localStorage.getItem("eventmember")=="true"?true:false
+    }
+
+
 
     
     this.renderer.addClass(document.body, 'sidebar-mini');

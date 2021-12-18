@@ -18,7 +18,7 @@
         <div class="form-group row">
             <label for="" class="mt-4 mr-3 col-2">Role :</label>
             <mat-radio-group class="mt-4" name="test" aria-label="Select an option" >
-                <mat-radio-button *ngFor="let item of roleList;  let i =index" (change)="onSelect($event)" [checked]="i==0" [value]="item.value" class="mr-2" >{{item.name}} </mat-radio-button>
+                <mat-radio-button *ngFor="let item of roleList;  let i =index" (change)="onSelect($event)" [checked]="i==0" [value]="item.value" class="mr-3" >{{item.name}} </mat-radio-button>
             </mat-radio-group>
         </div>
         

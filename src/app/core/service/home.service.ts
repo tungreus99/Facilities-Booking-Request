@@ -26,7 +26,7 @@ export class HomeService extends BaseApiService{
 
    }
    public addRequest(requestBody):Observable<any>{
-    return this.http.post(this.rootUrl+`/addRequest`,requestBody,this.httpOptions)
+    return this.http.post(this.rootUrl+`/addRequestEvent`,requestBody,this.httpOptions)
 
    }
    public getRequestDetail(requestId:any):Observable<any>{

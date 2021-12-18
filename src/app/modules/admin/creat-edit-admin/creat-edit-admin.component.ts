@@ -15,7 +15,7 @@ import { AppComponentBase } from '@shared/app-component-base';
 export class CreatEditAdminComponent extends AppComponentBase  implements OnInit {
   title;
   account = {role:"ROLE_SRO"} as AccountDto;
-  roleList = [{name: "SRO", value : "ROLE_SRO"},{name:"PDP",value:"ROLE_ICPDP"},{name: "ADMIN" ,value: "ROLE_ADMIN"} ]
+  roleList = [{name: "SRO", value : "ROLE_SRO"},{name:"IC-PDP",value:"ROLE_ICPDP"},{name: "ADMIN" ,value: "ROLE_ADMIN"}, {name: "TRAINING DEPARTMENT" ,value: "ROLE_TD"} ]
   constructor(injector: Injector,
     public dialogRef: MatDialogRef<CreatEditAdminComponent>, private dialog: MatDialog, private router:Router,
     private adminService: AdminService,

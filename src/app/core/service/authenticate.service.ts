@@ -16,6 +16,7 @@ export class AuthenticateService extends BaseApiService {
   public userId: number
   public requestTypeStatus
   public clubMember:boolean
+  public eventMember:boolean
   public userRole:string =""
   public userName:string =""
   constructor(
