@@ -1,0 +1,130 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <h3>{{isViewTable?'Time table':requestType=='Week'?'Book request for Week':requestType=='Event'?'Book request for Event':'Book request for Month' }}
+                </h3>
+            </div>
+            <div class="col-6 text-right">
+                <!-- <button type="button" class="btn bg-blue" (click)="addRequest()">
+                    <i class="fa fa-plus-square mr-1"></i>
+                    {{ 'Create booking request' | localize }}
+                </button> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content px-2">
+    <div class="container-fluid">
+        <div class="card">
+            <!-- <div class="card-header row">
+                <div class="input-group ">
+                    <div class="input-group-prepend">
+                        <button type="button" class="btn bg-blue">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <input type="text" class="form-control" name="keyword" placeholder="Search" />
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-default">
+                            <i class="fas"></i>
+                        </button>
+                    </div>
+                </div>
+            </div> -->
+            <div class="mb-0 mt-1">
+            </div>
+            <div class="card-body table-responsive px-4 pb-4">
+                <div class="">
+                    <div class="my-3 row">
+
+                        <label for="" class="mt-3 mr-2">Building:</label>
+                        <mat-form-field appearance="outline" style="width: 250px;">
+                            <mat-select (selectionChange)="onBuidingChange()" placeholder="Building"
+                                [(ngModel)]="selectedBuildingName" name="Building">
+                                <mat-option *ngFor="let building of buidingList" [value]="building">
+                                    {{building.facilityName}}</mat-option>
+
+
+                            </mat-select>
+                        </mat-form-field>
+                        <label for="" class="ml-5 mt-3 mr-2">Room number: </label>
+                        <mat-form-field appearance="outline" style="width: 250px;">
+                            <mat-select [disabled]="isRoomSelect==false" placeholder="Room" [(ngModel)]="selectedRoom"
+                                (selectionChange)="onRoomChange()">
+                                <mat-option *ngFor="let room of roomList" [value]="room">{{room.facilityName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <label *ngIf="requestType != 'Semester'" for="" class="ml-5 mr-2 mt-3">Date:</label>
+                        <mat-form-field *ngIf="requestType != 'Semester'" appearance="outline" style="width: 230px;">
+                            <mat-select [(ngModel)]="selectedWeek" (selectionChange)="onWeekchange()"
+                                placeholder="choice date">
+                                <mat-option *ngFor="let bookDate of bookingListForDropdown; let i =index" [value]="i+1">
+                                    {{bookDate[0].useDate | date:"dd/MM/yyyy"}} -
+                                    {{bookDate[bookingListForDropdown.length+2].useDate | date:"dd/MM/yyyy"}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <div *ngIf="authenticateService.clubMember && requestType != 'Semester' && requestType !='Event'">
+                            <label for="" class=" ml-5 pl-0 mt-1 mr-3 mt-3">
+                                Book by club:
+                            </label>
+                            <mat-slide-toggle (change)="onBookByClubChange($event)" [(ngModel)]="bookByClub"
+                                name="building" name="clubMember" class="mt-3"> </mat-slide-toggle>
+                        </div>
+
+                    </div>
+
+                    <h4 class="text-danger mt-3"
+                        *ngIf="isNotforPerson==true">This
+                        facility is not for personal booking!</h4>
+
+                    <div class="table-responsive"
+                        [hidden]="(selectedBuildingName?.notForPersonal == true && isRoomSelect==false )|| selectedRoom?.notForPersonal == true"
+                        *ngIf="listDay.length>0  ">
+                        <table class="table table-bordered text-center" [busy]="isLoading">
+                            <thead>
+                                <tr class="bg-light-gray">
+                                    <th class="text-uppercase">Time
+                                    </th>
+                                    <th class="text-uppercase" *ngFor="let day of listDay">
+                                        {{day.day}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let slot of listSlot; let i =index">
+                                    <th>{{slot.slot}}</th>
+                                    <td *ngFor="let day of listDay; let j =index ">
+                                        <ng-container *ngIf="!isViewTable && fillToTimeTable(slot.slot,day?.day,i).statusName !='Busy' && fillToTimeTable(slot.slot,day?.day,i).statusName !='Pending' ">
+                                            <button class="btn" (click)="addBooking(slot.slot,day, btn)" #btn
+                                            [disabled]="(!allowBooking || (day?.day.includes('Monday') && currentDate=='Tuesday' && selectedWeek==1)  ) && requestType!='Semester' || checkSlot(slot.time, day?.day)  "
+                                            *ngIf="(selectedRoom || selectedBuildingName ) && fillToTimeTable(slot.slot,day?.day).statusName == ''  ">
+                                            <i class="fas fa-plus text-primary fa-lg"></i>
+                                        </button>
+                                        </ng-container>
+                                        <div
+                                           >
+                                            <strong  [ngClass]="fillToTimeTable(slot.slot,day?.day,i).statusName=='Pending'?'text-warning':fillToTimeTable(slot.slot,day?.day,i).statusName=='Busy'?'text-danger':''">
+                                                {{fillToTimeTable(slot.slot,day?.day,i).statusName}}
+                                            </strong>
+                                        </div>
+                                            <p style="line-height: 10px; color: black;">
+                                                {{fillToTimeTable(slot.slot,day?.day,i).author}}
+                                            </p>
+                                            
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

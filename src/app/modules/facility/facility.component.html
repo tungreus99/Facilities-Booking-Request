@@ -1,0 +1,136 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <h1>{{'Facility' }}</h1>
+            </div>
+            <div class=" button-group col-md-6 col-sm-12 col-xs-12 text-right">
+
+                <button type="button" class="btn bg-warning mr-2" (click)="importFile()">
+                    <i class="fas fa-upload mr-1"></i>
+                    {{ 'Import facility' }}
+                </button>
+                <button type="button" class="btn bg-green mr-2" (click)="exportFile()">
+                    <i class="fas fa-file-export mr-1"></i>
+                    {{ 'Export facility' }}
+                </button>
+                <button type="button" class="btn bg-blue" (click)="opendialog()">
+                    <i class="fa fa-plus-square mr-1"></i>
+                    {{ 'Add facility' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content px-2">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="mb-0 mt-1">
+            </div>
+            <div class="card-body table-responsive p-4">
+                <div class="card-header px-0 pt-0">
+                    <div class="input-group  pt-1">
+                        <div class="input-group-prepend">
+                            <button type="button" class="btn bg-blue" (click)="searchFacility()">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <input type="text" class="form-control" name="keyword" placeholder="Search by name"
+                            [(ngModel)]="searchText" (keyup.enter)="searchFacility()" />
+                    </div>
+                </div>
+                <div class="">
+                    <div class="my-3">
+                        <label for="" class=" mt-1 mr-2">Building: </label>
+                        <mat-form-field appearance="outline" style="width: 250px;">
+                            <mat-select placeholder="Room" [(ngModel)]="selectedBuiding"
+                                (selectionChange)="onBuildingChange()">
+                                <mat-option [value]="-1">All</mat-option>
+                                <mat-option [value]="0">Buiding</mat-option>
+                                <mat-option [value]="1">Room</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center table-hover table-striped text-nowrap">
+                            <thead>
+                                <tr class="bg-light-gray">
+                                    <th style="width: 80px;">#</th>
+                                    <th>Facility</th>
+                                    <th>Capacity</th>
+                                    <th>Building</th>
+                                    <th>For club event</th>
+                                    <th>Available</th>
+                                    <th>Not for personal</th>
+                                    <th style="width: 160px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="let facility of facilityList| paginate: { id:'paging', itemsPerPage: 10, currentPage: p } ; let i=index  ">
+                                    <td>{{i+1}}</td>
+                                    <td>{{facility.facilityName}}</td>
+                                    <td class="text-center">{{ facility.capacity }}</td>
+                                    <td style="width: 150px;" class="text-center">
+
+                                        <i
+                                            [ngClass]="facility.building?'fas fa-check fa-lg text-success':'fas fa-times fa-lg text-danger'"></i>
+
+                                    </td>
+                                    <td style="width: 150px;" class="text-center">
+                                        <i
+                                            [ngClass]="facility.forClubEvent?'fas fa-check fa-lg text-success':'fas fa-times fa-lg text-danger'"></i>
+                                    </td>
+                                    <td style="width: 150px;" class="text-center">
+
+                                        <i
+                                            [ngClass]="facility.available?'fas fa-check fa-lg text-success':'fas fa-times fa-lg text-danger'"></i>
+
+                                    </td>
+                                    <td style="width: 150px;" class="text-center">
+
+                                        <i
+                                            [ngClass]="facility.notForPersonal?'fas fa-check fa-lg text-success':'fas fa-times fa-lg text-danger'"></i>
+
+                                    </td>
+
+
+
+
+
+
+                                    <td>
+                                        <div class="md-group">
+                                            <button class="btn btn-primary mr-1"
+                                            (click)="opendialog(facility)">Edit</button>
+                                        <button class="btn btn-danger"
+                                            (click)="deleteFacility(facility)">Delete</button>
+                                        </div>
+                                       
+                                        <div class="mobile-group" style="display: none;">
+                                            <button mat-button [matMenuTriggerFor]="menu"><i
+                                                    class="fas fa-bars"></i></button>
+                                            <mat-menu class="menu" #menu="matMenu">
+                                                
+                                                <button mat-menu-item class="btn w-100 "
+                                                    (click)="opendialog(facility)">Edit</button>
+                                                <button mat-menu-item class="btn w-100 "
+                                                    (click)="deleteFacility(facility)">Delete</button>
+                                            </mat-menu>
+
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <pagination-controls id="paging" (pageChange)="p = $event"></pagination-controls>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

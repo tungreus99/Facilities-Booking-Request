@@ -1,0 +1,110 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-xs-12 col-sm-12">
+        <h1>{{ "Event" }}</h1>
+      </div>
+      <div class="col-md-6 col-xs-12 col-sm-12 text-right button-group row justify-content-end">
+       
+          <button type="button" class="btn bg-warning mr-2" (click)="importFile()">
+            <i class="fas fa-upload mr-1"></i>
+            {{ 'Import Event' }}
+          </button>
+          <button type="button" class="btn bg-green mr-2" (click)="exportFile()">
+            <i class="fas fa-file-export mr-1"></i>
+            {{ 'Export Event' }}
+          </button>
+        
+        
+          <button type="button" class="btn bg-secondary mr-2" (click)="opendialogOldEvent()">
+            <i class="fas fa-history mr-1"></i>
+            {{ "History Event" }}
+          </button>
+          <button type="button" class="btn bg-blue" (click)="opendialog()">
+            <i class="fa fa-plus-square mr-1"></i>
+            {{ "Add event" }}
+          </button>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="card mx-4 my-2 p-4">
+  <div class="card-header px-0 pt-0">
+    <div class="input-group  pt-1">
+      <div class="input-group-prepend">
+        <button type="button" class="btn bg-blue" (click)="searchEvent()">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+      <input type="text" class="form-control" name="keyword" placeholder="Search by name" [(ngModel)]="searchText"
+        (keyup.enter)="searchEvent()" />
+      <div class="input-group-append">
+        <!-- <button type="button" class="btn btn-default" (click)="checkAddFilter()">
+              <i class="fas" [class.fa-angle-up]="advancedFiltersVisible"
+                  [class.fa-angle-down]="!advancedFiltersVisible"></i>
+          </button> -->
+      </div>
+
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered text-center table-hover table-striped">
+      <thead>
+        <tr class="bg-light-gray">
+          <th style="width: 80px">#</th>
+          <th>Event name</th>
+          <th>From date</th>
+          <th>To date</th>
+          <th>Member</th>
+          <th style="width: 286px">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="
+              let event of eventList
+                | paginate: { id: 'paging', itemsPerPage: 10, currentPage: p };
+              let i = index
+            ">
+          <td>{{ i + 1 }}</td>
+          <td>{{ event.eventName }}</td>
+          <td>{{ event.fromDate | date:"dd/MM/yyyy " }}</td>
+          <td>{{ event.toDate | date:"dd/MM/yyyy " }}</td>
+          <td>{{event.accounts.length}}</td>
+          <td>
+            <div class="md-group">
+              <button class="btn btn-primary mr-1" (click)="opendialog(event)">
+                Edit
+              </button>
+              <button class="btn btn-danger mr-1 " (click)="deleteEvent(event)">
+                Delete
+              </button>
+              <button class="btn btn-success " (click)="detail(event)">
+                Detail event
+              </button>
+            </div>
+
+
+
+            <div class="mobile-group" style="display: none;">
+              <button mat-button [matMenuTriggerFor]="menu"><i class="fas fa-bars"></i></button>
+              <mat-menu class="menu" #menu="matMenu">
+                <button mat-menu-item class="btn w-100 " (click)="opendialog(event)">
+                  Edit
+                </button>
+                <button mat-menu-item class="btn w-100 " (click)="deleteEvent(event)">
+                  Delete
+                </button>
+                <button mat-menu-item class="btn w-100 " (click)="detail(event)">
+                  Event detail
+                </button>
+              </mat-menu>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <pagination-controls id="paging" (pageChange)="p = $event"></pagination-controls>
+</div>

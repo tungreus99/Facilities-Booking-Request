@@ -1,0 +1,109 @@
+<div [@routerTransition] class="bg">
+  <!-- <section class="content-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+          </div>
+        </div>
+      </div>
+    </section> -->
+  <section class="content px-2">
+    <div class="container-fluid">
+      <div class="">
+
+        <div class="card-body">
+          <div class="row main-content">
+            <div class="col-md-8 col-xs-12 col-sm-12 ">
+              <div class="w-80" *ngIf="authenService.userRole == 'ROLE_SRO'">
+                <div class="small-box bg-primary" (click)="viewSchedule()">
+                  <div class="inner pointer">
+                    View Booking Schedule
+                    <i class="fas fa-info-circle float-right mt-1"></i>
+                  </div>
+                  <div class="icon">
+                  </div>
+                </div>
+              </div>
+              <div class="card" style="min-height: 70vh;" *ngIf="authenService.userRole != 'ROLE_SRO'">
+                <div class="card-header">
+                  <h3>Pending Request</h3>
+                </div>
+                <div class="card-body list-request">
+                  <mat-accordion>
+                    <mat-expansion-panel expanded="false" class="mb-3 " style="border-color: #f3f3f3;"
+                      *ngFor="let request of listPendingRequest | paginate: { id:'paging', itemsPerPage: 10, currentPage: p } ; let i=index  ">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title class="mt-1">
+                          <strong>
+                            {{request.dateCreated | date:"dd/MM/yyyy "}}
+                          </strong>
+                        </mat-panel-title>
+
+                        <button class="btn btn-primary btn-sm float-right mr-3"
+                          (click)="viewRequestDetail(request);$event.stopPropagation()">
+                          View Detail
+                        </button>
+                      </mat-expansion-panel-header>
+                      <p>{{request.note}}</p>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                  
+                </div>
+                <pagination-controls id="paging" (pageChange)="p = $event"></pagination-controls>
+              </div>
+            </div>
+            <div class="action-group col-md-3 col-xs-12 col-sm-12 ml-5" *ngIf="authenService.userRole != 'ROLE_SRO'" style="padding-top: 66px;">
+              <div class="w-80">
+                <div class="small-box bg-primary" (click)="viewSchedule()">
+                  <div class="inner pointer">
+                    View Booking Schedule
+                    <i class="fas fa-info-circle float-right mt-1"></i>
+                  </div>
+                  <div class="icon">
+                  </div>
+                </div>
+              </div>
+              <div class="w-80">
+                <div class="small-box bg-primary" (click)="viewFacility()">
+                  <div class="inner pointer">
+                    Facilities Management
+                    <i class="fas fa-info-circle float-right mt-1"></i>
+                  </div>
+                  <div class="icon">
+                  </div>
+                </div>
+              </div>
+              <div class="w-80">
+                <div class="small-box bg-primary" (click)="viewClub()">
+                  <div class="inner pointer">
+                    Club Management
+                    <i class="fas fa-info-circle float-right mt-1"></i>
+                  </div>
+                  <div class="icon">
+                  </div>
+                </div>
+              </div>
+              <div class="w-80">
+                <div class="small-box bg-primary" (click)="viewEvent()">
+                  <div class="inner pointer">
+                    Event Management
+                    <i class="fas fa-info-circle float-right mt-1"></i>
+                  </div>
+                  <div class="icon">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="w-80">
+                <div class="text-danger row book-by-month">
+                  <label class="mr-2 ml-1" for="" style="font-size: 20px; color: white;">Allow to book by month: </label>
+                  <mat-slide-toggle class="mt-1 " name="available" (change)="setRequestTypeStatus()" [(ngModel)]="allowSendMonthRequest"></mat-slide-toggle>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

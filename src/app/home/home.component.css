@@ -1,0 +1,72 @@
+.view-request:hover {
+  color: #dc3545 !important;
+}
+.main-content{
+  background: url("../../assets/img/FPT_AERIAL-01_20171109.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.bg-orange{
+  background: #F3950D;
+  font-size: 18px;
+ 
+  color: white !important;
+  border: none;
+  
+}
+.bg-orange:disabled{
+  border: none;
+  font-size: 19px;
+  color: white !important;
+
+}
+.inner{
+  font-size: 18px;
+}
+.action-group i{
+  font-size: 20px;
+}
+.bg-image{
+  max-width: 100%;
+  position: relative;
+  background-blend-mode: darken;
+  filter: brightness(0.9);
+}
+.special{
+  line-height: 34px;
+}
+
+@media only screen and (max-width: 652px) {
+  
+  .confirm-request span{
+    font-size: 14px !important;
+  }
+  .confirm-request mat-card{
+    padding: 10px;
+  }
+ 
+  section{
+    padding: 0;
+  }
+  .container-fuild{
+    padding: 0;
+  }
+  h1{
+    text-align: center;
+    margin-top: 20px;
+  }
+  .title{
+    padding-left: 0 !important;
+  }
+  .main-card{
+    padding: 0 !important;
+    width: 100%;
+  }
+  .action-group{
+    padding-left: 17px;
+    padding-right: 8px;
+  }
+  button{
+    text-align: center !important;
+  }
+}

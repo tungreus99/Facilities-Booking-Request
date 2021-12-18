@@ -1,0 +1,21 @@
+<div >
+    <div class="row w-100"  >
+      
+        <div class="row w-100">
+            <div class="col-3">
+                <img [src]="getAvatar(user)" class="rounded-circle ml-3 mt-1" width="45px" style="max-width: 100%;" alt="avatar">
+            </div>
+        <div class="col-9 pl-3 text-left" >
+            <p class="m-0 text-overflow"><strong>{{user?.fullName}}</strong></p>
+            <p class="m-0 text-left text-overflow">  
+                <span class="mr-1" [ngClass]="APP_CONST.userBranchStyle[user.branch]">{{APP_ENUM.Branch[user.branch]}} {{getProjectTypefromEnum(user.branch,APP_ENUM.Branch)}}</span>
+                <span [ngClass]="APP_CONST.userTypeStyle[user.userType]">{{APP_ENUM.UserType[user.userType]}} {{getProjectTypefromEnum(user.userType,APP_ENUM.UserType)}}</span>
+            </p>
+            <p class="text-overflow m-0"><span>{{user?.emailAddress}}</span></p>
+        </div>
+         
+        </div>
+    </div>
+
+
+</div>

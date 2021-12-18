@@ -1,0 +1,17 @@
+@media only screen and (max-width: 652px){
+    .button-group{
+        text-align: center;
+        display: flex;
+        margin-top: 10px;
+    }
+    .button-group button i{
+        display: none;
+    }
+    .md-group{
+        display: none;
+    }
+    .mobile-group{
+        display: block !important;
+        text-align: center;
+    }
+}

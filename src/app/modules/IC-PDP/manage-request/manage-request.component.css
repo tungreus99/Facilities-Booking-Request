@@ -1,0 +1,23 @@
+.bg{
+    background: url("../../../../assets/img/FPT_AERIAL-01_20171109.jpg");
+    background-position: center;
+    background-size: cover;
+}
+@media only screen and (max-width: 652px){
+    .action-group{
+        margin-left: 0 !important;
+        padding-top: 20px !important;
+    }
+    .book-by-month{
+        justify-content: center;
+    }
+    .card-body{
+        padding: 0;
+    }
+    .card{
+        margin-top: 25px;
+    }
+    .list-request{
+        padding: 12px;
+    }
+}

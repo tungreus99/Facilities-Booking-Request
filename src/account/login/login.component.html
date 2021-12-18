@@ -1,0 +1,77 @@
+﻿<div [@routerTransition]>
+  <h3 class="text-center mb-3">{{ "Log In"  }}</h3>
+  <form novalidate autocomplete="off" #loginForm="ngForm" (ngSubmit)="login()">
+    <!-- <div class="form-group">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          name="userNameOrEmailAddress"
+          [(ngModel)]="authenService.account.email"
+          [placeholder]="'UserNameOrEmail' "
+          required
+          maxlength="256"
+          #userNameOrEmailAddressModel="ngModel"
+          #userNameOrEmailAddressEl
+        />
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-user"></span>
+          </div>
+        </div>
+      </div>
+      <abp-validation-summary
+        [control]="userNameOrEmailAddressModel"
+        [controlEl]="userNameOrEmailAddressEl"
+      ></abp-validation-summary>
+    </div>
+  
+    <div class="form-group">
+      <div class="input-group">
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="authenService.account.passWord"
+          [placeholder]="'Password' "
+          
+          maxlength="32"
+          #passwordModel="ngModel"
+          #passwordEl
+        />
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-lock"></span>
+          </div>
+        </div>
+      </div>
+      <abp-validation-summary
+        [control]="passwordModel"
+        [controlEl]="passwordEl"
+      ></abp-validation-summary>
+    </div>
+   
+    <div class="form-group row">
+      <div class="col-md-4">
+        <button
+          type="submit"
+          class="btn btn-primary btn-block"
+         
+        >
+          {{ "LogIn"  }}
+        </button>
+      </div>
+      
+    </div> -->
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" style="margin-top: 25px;">
+      <button mat-flat-button type="button"  color="primary" style="width: 100%" (click)="signInWithGoogle()">
+          Log In With Google
+      </button>
+  </div>
+  </form>
+  <!-- <p  class="mb-1">
+    <a [routerLink]="['../register']">
+      <i class="fa fa-plus-circle"></i> {{ "Register"  }}
+    </a>
+  </p> -->
+</div>

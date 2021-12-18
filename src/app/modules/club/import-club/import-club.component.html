@@ -1,0 +1,29 @@
+<form action="" #timesheetDetailForm>
+    <div class="all_dialog">
+        <div class="header_h">
+            <div class="h_drag_and_drop row pl-1">
+                <h3>Import File</h3>
+            
+            </div>
+        </div>
+        <div class="">
+               
+                <div style="padding-top: 10px; border-top: 1px solid #eee;">
+                    <button class="btn btn-success btn-sm" (click)="exportFile()">
+                        <i class="fas fa-download mr-1"></i>
+                        Template
+                    </button>
+                    <label style="display: block; margin-bottom: 15px;" class="mt-2">Choose file</label>
+                    <input type="file" class="form-group" id="file"  (change)="selectFile($event)">
+                </div>
+                
+          
+        
+        </div>
+       
+        <div style="margin-top: 30px;">
+            <button mat-flat-button color="primary"  class="btn_accept" (click)="importExcel()">Import</button>
+            <button mat-raised-button style="margin-left: 10px;" mat-dialog-close>Cancel</button>
+        </div>
+      </div>
+</form>

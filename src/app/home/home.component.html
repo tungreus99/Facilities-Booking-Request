@@ -1,0 +1,128 @@
+﻿<div [@routerTransition] class="main-content">
+
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 title" style="padding-left: 59px;">
+            <h1 class="text-white" style="font-size: 35px; font-family: ui-sans-serif;">Home Page</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class=" px-2">
+      <div class="container-fluid">
+        <div class=" ">
+          <div class="main-card card-body">
+            <div class="row" style="justify-content: space-around;">
+              <div class=" action-group col-md-3 action-group col-xs-12 col-sm-12" style="padding-top: 59px;">
+                <div class="w-80">
+                  <div class="small-box bg-orange">
+                    <div class="inner pointer text-white" (click)="createRequest('Week')">
+                      Add booking request for a Week
+                      <i class="fas fa-plus fa-lg float-right mt-1"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-80" *ngIf="authenService.clubMember">
+                  <div class="small-box ">
+  
+                    <button class="btn btn-primary w-100 text-left bg-orange special" [disabled]="!allowMonthRequest"
+                      (click)="createRequest('Semester')">
+                      Add booking request for a Semester
+                      <i class="fas fa-plus fa-lg float-right mt-2"></i>
+                    </button>
+  
+                    <!-- <div class="inner pointer" (click)="createRequest('Month')" >
+                      Create booking request for a Month
+                      <i class="fas fa-plus fa-lg float-right mt-1"></i>
+                    </div>
+                    <div class="icon">
+                    </div> -->
+  
+                  </div>
+                </div>
+                <div class="w-80 ">
+                  <div class="small-box">
+  
+  
+                    <button class="btn btn-primary w-100 text-left  bg-orange text-white special" *ngIf="allowBookEvent"
+                    (click)="createRequest('Event')">
+                    Add booking request for Event
+                    <i class="fas fa-plus fa-lg float-right mt-2"></i>
+                  </button>
+  
+  
+                   
+                  </div>
+                </div>
+                <div class="w-80">
+                  <div class="small-box bg-orange" (click)="createRequest('Week',true)">
+                    <div class="inner pointer text-white">
+                      View Timetable
+                      <i class="fas fa-info-circle float-right mt-1"></i>
+                    </div>
+                    <div class="icon">
+                    </div>
+                  </div>
+                </div>
+                <div class="w-80">
+                  <div class="small-box bg-orange">
+                    <div class="inner pointer text-white" (click)="report()">
+                      Report
+                      <i class="fas fa-info-circle float-right mt-1"></i>
+  
+                    </div>
+                  </div>
+                </div>
+  
+              </div>
+              <div class="col-md-8 col-xs-12 col-sm-12 ml-2">
+                <div class="card" style="min-height: 300px;">
+                  <div class="card-header d-flex">
+                    <h4 class=" d-inline" >
+                      Your request status <span class="badge badge-dark ml-2">{{totalRequest}}</span>
+                    </h4>
+                    <span class="">
+                      <i class="fas fa-info-circle fa-2x ml-3 view-request text-primary" (click)="viewRequest('a')"></i>
+                    </span>
+                  </div>
+                
+                 
+                  <div class="card-body">
+                    <p
+                      *ngFor="let item of requestList | paginate: { id:'pendingPaging', itemsPerPage: 5, currentPage: pendingPageNum }">
+                      <mat-card>Create date: <strong>{{item.dateCreated | date:"dd/MM/yyyy"}} </strong>
+                        <span
+                          [ngClass]="item.status=='PENDING'?'badge badge-pill badge-primary':item.status=='APPROVED'?'badge badge-pill badge-success':item.status=='REJECT'?'badge badge-pill badge-danger':''"
+                          class=" float-right">{{item.status}}</span>
+                      </mat-card>
+                    </p>
+                   
+                  </div>
+                  <pagination-controls id="pendingPaging" (pageChange)="pendingPageNum = $event"></pagination-controls>
+                </div>
+                <div class="card" style="min-height: 300px;">
+                  <h4 class="card-header pointer" >
+                    Confirm your request
+                  </h4>
+                  <div class="card-body confirm-request">
+                    <p
+                      *ngFor="let item of requestListByDate  | paginate: { id:'confirmPaging', itemsPerPage: 5, currentPage: confirmPagNum }">
+                      <mat-card  >
+                        <span style="font-size: 1rem;" class="text-danger ml-3">Bạn có muốn sử dụng {{item.facility.facilityName}} vào {{item.timeUsing}} ngày {{item.useDate | date:"dd/MM/yyyy"}}</span>
+                        <button class="btn btn-success float-right btn-sm " (click)="$event.stopPropagation(); ConfirmRequest(item)">Yes</button>
+                        <button class="btn btn-danger float-right btn-sm mr-2" (click)="$event.stopPropagation(); closeRequest(item)">No</button>
+                      </mat-card>
+                    </p>
+                  </div>
+                  <pagination-controls id="confirmPaging" (pageChange)="confirmPagNum = $event"></pagination-controls>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+
+</div>

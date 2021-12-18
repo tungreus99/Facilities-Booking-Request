@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="card-header">
+    <div class="row">
+        <div class="col-8"> <h3>Club detail: {{clubDetail.clubName}}</h3> </div>
+        <!-- <div class="col-4"> <button class="btn btn-primary" (click)="addClubMembet()">add club member</button></div> -->
+    </div>    
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+
+        
+        <table class="table w-100 ">
+            <thead>
+                <tr>
+                    <th>stt</th>
+                    <th>fullName</th>
+                    <th>email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let account of clubDetail.accounts; let i= index">
+                    <td  class="text-center"> {{i+1}}</td>
+                    <td class="text-center">{{account.fullName}}</td>
+                    <td  class="text-center">{{account.email}}</td>
+                
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<section class="content px-2">
+    <div class="container-fluid">
+        <h3>{{isViewDetail?'List of request detail':'Request list'}}</h3>
+        <div class="row">
+            <div class="col col-4 mr-2 card p-4 justify-content-between">
+                <div class="form-group row">
+                    <!-- <label for="" class="mt-2 mr-2">Request:</label>
+                    <strong class="ml-2 mt-2" style="font-size: 1.2rem;">
+                        abc
+                    </strong> -->
+                </div>
+                <div class="form-group row">
+                    <label class="mt-2 mr-2" for="">Date:</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="currentDate" disabled>
+                        <mat-datepicker-toggle matSuffix [for]="picker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="form-group row">
+                    <label class="mr-2 mt-2" for="">Type:</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select [(ngModel)]="selectedType" disabled="true">
+                            <mat-option *ngFor="let type of requestTypeLsit" [value]="type">
+                                {{type}}
+                            </mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group row">
+                    <label class="mt-2 mr-2" for="">Reason:</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <textarea [(ngModel)]="request.note" rows="8" matInput placeholder="text" required
+                            [disabled]="action=='view' || isViewDetail"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <label for="" class="pl-0 mt-1 mr-3 col-3">
+                        Book by club:
+                    </label>
+                    <mat-slide-toggle disabled="true" name="building" [(ngModel)]="request.bookedByClub" name="clubMember"
+                       > </mat-slide-toggle>
+                </div>
+                
+            </div>
+            <div class="col col-7 card">
+                <div class="card-body" *ngIf="action=='view' || action =='view-detail' || action=='pdp-view'">
+                    <mat-card class="pointer d-flex justify-content-between mt-2"
+                        *ngFor="let detail of requestDetailList">
+                        <strong class=" ml-3">{{detail.useDate |date: "dd/MM/yyyy"}}</strong>
+                        <span> {{detail.timeUsing}}</span>
+                        <span>{{detail?.facility?.facilityName}}</span>
+                    <div class="w-25">
+                      
+                    </div>
+                       
+
+                    </mat-card>
+                </div>
+                <div class="card-body" *ngIf="action=='create'">
+
+                    <!-- <button class="btn btn-primary" (click)="addRequest()"> Add</button> -->
+
+                    <mat-card *ngFor="let detail of requestDetailList"
+                        class="pointer d-flex justify-content-between mt-3" style="cursor: default !important;">
+                        <strong class=""> {{detail.facility.facilityName}} </strong> <span style="height: fit-content;"
+                            class="badge badge-secondary mt-1">{{detail.timeUsing}} </span>
+                        <span> date: {{detail.useDate}} </span>
+
+                        <span> <i class="fas fa-times fa-2x"
+                                (click)="remove(detail); $event.stopPropagation()"></i></span>
+                    </mat-card>
+                    <mat-card class="pointer d-flex justify-content-center mt-2" (click)="addRequest()">
+                        <i class="fas fa-plus fa-2x text-primary"></i>
+                    </mat-card>
+                </div>
+
+            </div>
+
+        </div>
+        <button class="btn btn-primary float-right" *ngIf="action=='create'" [disabled]="!request.note || requestDetailList.length == 0" (click)="saveRequest()">Save</button>
+        <button class="btn btn-danger float-right mr-2 " *ngIf="action=='create'" (click)="CancelAdd()">Cancel</button>
+        <button class="btn btn-default float-right" *ngIf="action=='view' || action == 'view-detail' || action=='pdp-view'" (click)="dialogRef.close()">Close</button>
+        <button  class="btn btn-success mr-2 float-right" *ngIf="action=='pdp-view'" (click)="approveRequest()">Approve</button>
+        <button class="btn btn-danger float-right mr-2" *ngIf="action=='pdp-view'" (click)="rejectRequest()">Reject</button>
+    </div>
+</section>

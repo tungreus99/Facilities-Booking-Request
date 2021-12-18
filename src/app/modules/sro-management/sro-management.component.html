@@ -1,0 +1,95 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <h1>{{ "SRO management" }}</h1>
+        </div>
+        <div class="col-6 text-right">
+              <button class="btn btn-primary" (click)="viewSchedule()">
+                View Booking Schedule
+              </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="card mx-4 my-2 p-4">
+    <div class="card-header px-0 pt-0">
+      <div class="input-group  pt-1">
+        <div class="input-group-prepend">
+          <button type="button" class="btn bg-blue" (click)="onChange()">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+        <input type="text" class="form-control" name="keyword" placeholder="Search by email" [(ngModel)]="searchText"
+          (keyup.enter)="onChange()" />
+      </div>
+    </div>
+    <div class="row my-1">
+      <div class="col-1 mt-3">
+        <label> Request type:</label>
+      </div>
+      <div class="col-4">
+        <mat-form-field appearance="outline">
+          <mat-select [(ngModel)]="filterRequestType" (selectionChange)="onChange()">
+            <mat-option value="">
+              All
+            </mat-option>
+            <mat-option value="week">
+              week
+            </mat-option>
+            <mat-option value="Semester">
+              Semester
+            </mat-option>
+            <mat-option value="Event">Event</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  
+    <div class="table-responsive">
+  
+      <table class="table table-bordered text-center table-hover table-striped" [busy]="isLoading">
+        <thead>
+          <tr class="bg-light-gray">
+            <th style="width: 80px">#</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Date created</th>
+            <th>Request type</th>
+            <th>Change Type</th>
+            <th>Status</th>
+  
+            <th>Note</th>
+            <th style="width: 180px">action</th>
+          </tr>
+        </thead>
+        <tbody>
+       
+  
+          <tr *ngFor="
+                  let request of requestLogList
+                    | paginate: { id: 'paging', itemsPerPage: 10, currentPage: p };
+                  let i = index
+                ">
+            <td>{{ i + 1 }}</td>
+            <td> {{ request.account.fullName }}</td>
+            <td>{{ request.account.email }}</td>
+            <td>{{ request.request.dateCreated | date:"dd/MM/yyyy " }}</td>
+            <td>{{request.request.typeRequest}}</td>
+            <td> <span> {{request.typeChange}}</span></td>
+            <td>{{request.request.status}}</td>
+            <td>{{ request.request.note }}</td>
+            <td>
+              <button type="button" class="btn btn-danger mr-1 " matTooltip="Info about the action" (click)="deleteRequestLog(request)">
+                Delete
+              </button>
+              <button class="btn btn-success" (click)="viewDetail(request)"
+                aria-label="Button that displays a tooltip when focused or hovered over">Detail</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 class="text-danger text-center" *ngIf="requestLogList.length==0"> No result is found!!!</h4>
+    </div>
+    <pagination-controls id="paging" (pageChange)="p = $event"></pagination-controls>
+  </div>
