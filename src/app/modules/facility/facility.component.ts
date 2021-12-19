@@ -112,11 +112,11 @@ export class FacilityComponent implements OnInit {
     })
   }
   searchFacility() {
-    if (this.searchText == "") {
+    if (this.searchText.trim() == "") {
       this.getAllFacility()
     }
     else {
-      this.pdpService.getFacilityByName(this.searchText).subscribe(data => {
+      this.pdpService.getFacilityByName(this.searchText.trim()).subscribe(data => {
         this.facilityList = data;
         this.tempFacilityList = data;
       },

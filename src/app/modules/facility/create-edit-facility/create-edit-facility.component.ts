@@ -36,6 +36,8 @@ export class CreateEditFacilityComponent extends AppComponentBase implements OnI
   }
 
   saveAndClose() {
+    this.facility.facilityName = this.facility.facilityName.trim()
+    
     this.facility.buildings = this.selectedBuilding
     if(this.facility.capacity<500){
       if (!this.facility?.buildings?.id) {

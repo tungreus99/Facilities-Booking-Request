@@ -97,11 +97,11 @@ export class ClubComponent implements OnInit {
     });
   }
   searchClub(){
-    if(this.searchText ==""){
+    if(this.searchText.trim() ==""){
       this.getAllClub()
     }
     else{
-      this.pdpService.getClubByName(this.searchText).subscribe(data=>{
+      this.pdpService.getClubByName(this.searchText.trim()).subscribe(data=>{
         this.clubList = data;
         this.tempClubList = data;
       },

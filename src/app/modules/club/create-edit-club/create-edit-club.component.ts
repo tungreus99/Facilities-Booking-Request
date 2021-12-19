@@ -36,6 +36,7 @@ export class CreateEditClubComponent
     }
   }
   saveAndClose() {
+    this.club.clubName= this.club.clubName.trim()
     if (!this.data.id) {
       this.icpdpService.AddClub(this.club).subscribe(
         (rs) => { },

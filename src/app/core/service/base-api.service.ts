@@ -9,7 +9,7 @@ export abstract class BaseApiService {
 
 
     public accontId: any
-    protected baseUrl = "https://facilities-booking-server.herokuapp.com/"
+    protected baseUrl = "http://localhost:8080/"
     public httpOptions = {}
 
     protected get rootUrl() {

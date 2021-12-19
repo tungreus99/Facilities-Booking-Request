@@ -79,11 +79,11 @@ export class SROManagementComponent implements OnInit {
 
   onChange() {
     if (this.filterRequestType == '') {
-      this.requestLogList = this.tempRequestLogList.filter(item => item.account.email.toLowerCase().includes(this.searchText.toLowerCase()))
+      this.requestLogList = this.tempRequestLogList.filter(item => item.account.email.toLowerCase().includes(this.searchText.trim().toLowerCase()))
     }
     else {
       this.requestLogList = this.tempRequestLogList.filter(item => item.request.typeRequest == this.filterRequestType
-        && (item.account.email.toLowerCase().includes(this.searchText.toLowerCase())))
+        && (item.account.email.toLowerCase().includes(this.searchText.trim().toLowerCase())))
 
     }
     this.p = 1

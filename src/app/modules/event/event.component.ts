@@ -113,11 +113,11 @@ export class EventComponent implements OnInit {
     });
   }
   searchEvent(){
-    if(this.searchText ==""){
+    if(this.searchText.trim() ==""){
       this.getAllEvent()
     }
     else{
-      this.pdpService.getEventByName(this.searchText).subscribe(data=>{
+      this.pdpService.getEventByName(this.searchText.trim()).subscribe(data=>{
         this.eventList = data;
         this.tempEventList = data;
       }

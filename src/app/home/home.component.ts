@@ -21,19 +21,21 @@ export class HomeComponent extends AppComponentBase {
   listBackground = [
     {
       event: "Spring",
-      url: "url('../../assets/img/FPT_AERIAL-01_20171109.jpg')"
+      url: "url('../../assets/img/FPT1.png')"
     },
     {
       event: "Summer",
-      url: "url('../../assets/img/FPT_AERIAL-01_20171109.jpg')"
+      url: "url('../../assets/img/FPT2.png')"
     },
     {
       event: "Autumn",
-      url: "url('../../assets/img/FPT_AERIAL-01_20171109.jpg')"
+      url: "url('../../assets/img/FPT3.png')"
+
     },
     {
       event: "Winter",
-      url: "url('../../assets/img/winter.jpg')"
+      url: "url('../../assets/img/FPT4.png')"
+
     }
   ]
   backgroundImg: string = ""
@@ -134,11 +136,12 @@ export class HomeComponent extends AppComponentBase {
   }
 
   getRequestByDate() {
+    let currentUser = localStorage.getItem("userName")
     let tomorrow = moment().add(1, 'days').format("YYYY-MM-DD");
 
     this.homeService.getRequestDetailByDate(tomorrow).pipe(catchError(this.homeService.handleError)).subscribe(data => {
       this.requestListByDate = data
-      this.requestListByDate = this.requestListByDate.filter(item => item.requestDetailStatus == "Open" && item.request.status == "APPROVED")
+      this.requestListByDate = this.requestListByDate.filter(item => item.requestDetailStatus == "Open" && item.request.status == "APPROVED" && item.request.account.email == currentUser)
     },
 
       (err) => {

@@ -30,6 +30,7 @@ export class CreatEditAdminComponent extends AppComponentBase  implements OnInit
     this.account.role = e.value
   }
   saveAndClose() {
+    this.account.email = this.account.email.trim()
     if (!this.data.id) {
       this.adminService.addAccount(this.account).subscribe(
         (rs) => {

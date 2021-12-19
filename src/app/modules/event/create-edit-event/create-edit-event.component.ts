@@ -31,6 +31,7 @@ export class CreateEditEventComponent extends AppComponentBase implements OnInit
     }
   }
   saveAndClose() {
+    this.event.eventName = this.event.eventName.trim()
     const startDate = this.event.fromDate;
     const endDate = this.event.toDate;
     const diffInDays = moment(endDate).diff(moment(startDate), 'days');

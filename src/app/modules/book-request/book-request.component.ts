@@ -47,6 +47,9 @@ export class BookRequestComponent extends AppComponentBase implements OnInit {
   bookByClub: boolean = false
   isViewTable: any = false
   isBookByRoom: boolean = false
+  isClubMember = localStorage.getItem("clubMember")=="true"?true:false
+  isEventMember = localStorage.getItem("eventmember")=="true"?true:false
+
   constructor(injector: Injector, private dialog: MatDialog, private facilityService: FacilityService, private route: ActivatedRoute,
     public authenticateService: AuthenticateService, private router: Router,
     private pdpService: IcpdpService, private homeService: HomeService) {

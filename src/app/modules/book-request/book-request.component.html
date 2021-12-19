@@ -113,7 +113,7 @@
                                                 {{fillToTimeTable(slot.slot,day?.day,i).statusName}}
                                             </strong>
                                         </div>
-                                            <p style="line-height: 10px; color: black;">
+                                            <p style="line-height: 10px; color: black;" *ngIf="isClubMember == true || isEventMember==true">
                                                 {{fillToTimeTable(slot.slot,day?.day,i).author}}
                                             </p>
                                             
