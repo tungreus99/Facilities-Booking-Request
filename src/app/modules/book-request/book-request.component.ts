@@ -109,6 +109,7 @@ export class BookRequestComponent extends AppComponentBase implements OnInit {
     this.isNotforPerson = this.selectedRoom.notForPersonal
     this.isBookByRoom = true
   }
+  tempNote:string =null
   addBooking(slot, day, e) {
     e.disabled = true
     let item = {
@@ -119,7 +120,8 @@ export class BookRequestComponent extends AppComponentBase implements OnInit {
         facilityName: this.bookByClub == false ? this.selectedRoom.facilityName : (this.bookByClub == true && !this.selectedRoom?.facilityName) ? this.selectedBuildingName.facilityName : this.selectedRoom.facilityName
       },
       request_detail_status: "Open",
-      element: e
+      element: e,
+      note:this.tempNote
     }
     console.log("test", item)
     let ref = this.dialog.open(RequestDetailComponent, {
@@ -143,10 +145,12 @@ export class BookRequestComponent extends AppComponentBase implements OnInit {
         this.homeService.requestListItem = []
       }
 
-      else if (rs.length > 0 && rs != "success" && rs != "addMore") {
+      else if (rs.length > 0 && rs != "success" && rs?.action != "addMore") {
         rs?.forEach(item => item.disabled = false)
       }
-      else if (rs == "addMore") {
+      else if (rs.action == "addMore") {
+        this.tempNote =rs.note
+        console.log("111",this.tempNote)
         return
       }
       else {
@@ -157,6 +161,7 @@ export class BookRequestComponent extends AppComponentBase implements OnInit {
           this.getRequestByRoom(this.selectedBuildingName.id)
         }
       }
+      
     })
   }
   disableBooking() {

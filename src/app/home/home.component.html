@@ -18,7 +18,7 @@
                 <div class="w-80">
                   <div class="small-box bg-orange">
                     <div class="inner pointer text-white" (click)="createRequest('Week')">
-                      Add booking request for a Week
+                      Create booking request for a Week
                       <i class="fas fa-plus fa-lg float-right mt-1"></i>
                     </div>
                   </div>
@@ -28,7 +28,7 @@
   
                     <button class="btn btn-primary w-100 text-left bg-orange special" [disabled]="!allowMonthRequest"
                       (click)="createRequest('Semester')">
-                      Add booking request for a Semester
+                      Create booking request for a Semester
                       <i class="fas fa-plus fa-lg float-right mt-2"></i>
                     </button>
   
@@ -47,7 +47,7 @@
   
                     <button class="btn btn-primary w-100 text-left  bg-orange text-white special" *ngIf="allowBookEvent || authenService.eventMember"
                     (click)="createRequest('Event')">
-                    Add booking request for Event
+                    Create booking request for Event
                     <i class="fas fa-plus fa-lg float-right mt-2"></i>
                   </button>
   

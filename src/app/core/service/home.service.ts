@@ -25,8 +25,15 @@ export class HomeService extends BaseApiService{
     return this.http.get(this.baseUrl+`api/getRequestDetailByFacility/${roomId}`,this.httpOptions)
 
    }
-   public addRequest(requestBody):Observable<any>{
-    return this.http.post(this.rootUrl+`/addRequestEvent`,requestBody,this.httpOptions)
+   public addRequest(requestBody, type):Observable<any>{
+     if(type == "Event"){
+         return this.http.post(this.rootUrl+`/addRequestEvent`,requestBody,this.httpOptions)
+
+     }
+     else{
+      return this.http.post(this.rootUrl+`/addRequest`,requestBody,this.httpOptions)
+
+     }
 
    }
    public getRequestDetail(requestId:any):Observable<any>{

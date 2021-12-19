@@ -21,7 +21,12 @@ export class ReportDialogComponent implements OnInit {
     this.homeService.report(this.report).pipe(catchError(this.homeService.handleError)).subscribe(data=>{
       abp.notify.success("Send report successful")
       this.ref.close()
-    })
+    },
+    () => {
+      abp.notify.success("Send report successful")
+      this.ref.close()
+    }
+    )
   }
 }
 export class reportDto{

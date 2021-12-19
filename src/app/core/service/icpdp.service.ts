@@ -103,6 +103,11 @@ export class IcpdpService extends BaseApiService {
   public getClubByName(name): Observable<any> {
     return this.http.get(this.rootUrl + `/getClubByName/${name}`, this.httpOptions)
   }
+
+  public getEventClubRequest(email): Observable<any> {
+    return this.http.get(this.baseUrl + `api/getEventClubRequest/${email}`, this.httpOptions)
+  }
+
   public handleError(error: any) {
     if (error.status == 401) {
       return throwError("401");

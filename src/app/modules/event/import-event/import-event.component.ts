@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { EventService } from '@app/core/service/event.service';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-import-event',
@@ -36,10 +37,16 @@ export class ImportEventComponent implements OnInit {
     console.log(this.selectedFiles)
     this.eventService.UpdateFileEvent(this.selectedFiles).subscribe(rs=>{
       // console.log("testtt3333")
-
+console.log("22222",rs)
+if(rs.type){
+  abp.notify.error("import fail")
+}
+else{
+  abp.notify.success("import successful")
+}
      
         this.dialogRef.close(true)
-        abp.notify.success("import successful")
+       
 
     },
     (err)=>{

@@ -36,8 +36,10 @@ export class RequestDetailComponent implements OnInit {
       this.isViewDetail = data.detail
 
     }
+    this.request.note = this.data.request.note
   }
   ngOnInit(): void {
+   
     this.getRequestDetail()
     if (this.action == "create") {
       this.homeService.requestListItem.push(this.data.request)
@@ -66,6 +68,7 @@ export class RequestDetailComponent implements OnInit {
   }
 
   approveRequest() {
+    this.requestBody.note = this.request.note
     this.requestBody.status = "APPROVED"
     this.pdpService.updateRequest(this.requestBody.id, this.requestBody).subscribe(rs => { }, (err) => {
       if(err == "401"){
@@ -81,6 +84,7 @@ export class RequestDetailComponent implements OnInit {
   }
  
   rejectRequest() {
+    this.requestBody.note = this.request.note
     this.requestBody.status = "REJECT"
     this.pdpService.updateRequest(this.requestBody.id, this.requestBody).subscribe(rs => { }, (err) => {
       if(err == "401"){
@@ -102,7 +106,7 @@ export class RequestDetailComponent implements OnInit {
       this.dialogRef.close(this.listRemove)
 
     } else {
-      this.dialogRef.close("addMore")
+      this.dialogRef.close( {action:"addMore" , note: this.request.note }    )
     }
   }
   saveRequest() {
@@ -120,7 +124,7 @@ export class RequestDetailComponent implements OnInit {
       },
       requestDetails: this.requestDetailList
     }
-    this.homeService.addRequest(requestBody).subscribe(rs => {
+    this.homeService.addRequest(requestBody,this.selectedType).subscribe(rs => {
       this.isSubmited = true
       abp.notify.success("add request successfull")
      

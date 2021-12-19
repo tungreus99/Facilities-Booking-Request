@@ -69,7 +69,7 @@
                             </mat-select>
                         </mat-form-field>
 
-                        <div *ngIf="authenticateService.clubMember && requestType != 'Semester' && requestType !='Event'">
+                        <div *ngIf="authenticateService.clubMember && requestType != 'Semester' && requestType !='Event' && !isViewTable">
                             <label for="" class=" ml-5 pl-0 mt-1 mr-3 mt-3">
                                 Book by club:
                             </label>

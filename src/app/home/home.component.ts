@@ -89,11 +89,16 @@ export class HomeComponent extends AppComponentBase {
     })
   }
   viewRequest(requestType) {
-    this.dialog.open(AllRequestDialogComponent, {
+   let ref = this.dialog.open(AllRequestDialogComponent, {
       width: "80vw",
       maxHeight: "95vh",
       data: {
         type: requestType,
+      }
+    })
+    ref.afterClosed().subscribe(rs=>{
+      if(rs){
+        this.getRequestist()
       }
     })
   }

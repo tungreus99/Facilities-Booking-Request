@@ -63,7 +63,7 @@
 
         <tr *ngFor="
                 let request of requestLogList
-                  | paginate: { id: 'paging', itemsPerPage: 10, currentPage: p };
+                  | paginate: { id: 'paging2', itemsPerPage: 10, currentPage: p };
                 let i = index
               ">
           <td>{{ i + 1 }}</td>
@@ -86,5 +86,5 @@
     </table>
     <h4 class="text-danger text-center" *ngIf="requestLogList.length==0"> No result is found!!!</h4>
   </div>
-  <pagination-controls id="paging" (pageChange)="p = $event"></pagination-controls>
+  <pagination-controls id="paging2" (pageChange)="p = $event"></pagination-controls>
 </div>

@@ -3,6 +3,7 @@ import { Component, Injector, OnInit, Renderer2 } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { SignalRAspNetCoreHelper } from '@shared/helpers/SignalRAspNetCoreHelper';
 import { LayoutStoreService } from '@shared/layout/layout-store.service';
+import { IcpdpService } from './core/service/icpdp.service';
 
 @Component({
   templateUrl: './app.component.html'
@@ -13,7 +14,7 @@ export class AppComponent extends AppComponentBase implements OnInit {
   constructor(
     injector: Injector,
     private renderer: Renderer2,
-    private _layoutStore: LayoutStoreService, private authenService: AuthenticateService
+    private _layoutStore: LayoutStoreService, private authenService: AuthenticateService, private pdpService:IcpdpService
   ) {
     super(injector); 
   }
@@ -41,8 +42,12 @@ export class AppComponent extends AppComponentBase implements OnInit {
     if(localStorage.getItem("eventmember")){
       this.authenService.eventMember = localStorage.getItem("eventmember")=="true"?true:false
     }
-
-
+    this.pdpService.getEventClubRequest(this.authenService.userName ).subscribe(rs=>{
+      this.authenService.clubMember = rs.clubStatus
+      this.authenService.eventMember = rs.eventStatus
+      localStorage.setItem("eventmember", rs.eventStatus)
+      localStorage.setItem("clubMember", rs.clubStatus)
+    })
 
     
     this.renderer.addClass(document.body, 'sidebar-mini');
