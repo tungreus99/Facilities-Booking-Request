@@ -107,7 +107,7 @@
                   </h4>
                   <div class="card-body confirm-request">
                     <p
-                      *ngFor="let item of requestListByDate  | paginate: { id:'confirmPaging', itemsPerPage: 5, currentPage: confirmPagNum }">
+                      *ngFor="let item of requestListByDate  | paginate: { id:'confirmPaging', itemsPerPage: 3, currentPage: confirmPagNum }">
                       <mat-card  >
                         <span style="font-size: 1rem;" class="text-danger ml-3">Bạn có muốn sử dụng {{item.facility.facilityName}} vào {{item.timeUsing}} ngày {{item.useDate | date:"dd/MM/yyyy"}}</span>
                         <button class="btn btn-success float-right btn-sm " (click)="$event.stopPropagation(); ConfirmRequest(item)">Yes</button>
