@@ -34,20 +34,9 @@ export class ImportEventComponent implements OnInit {
       abp.message.error("Choose a file!")
       return
     }
-    console.log(this.selectedFiles)
     this.eventService.UpdateFileEvent(this.selectedFiles).subscribe(rs=>{
-      // console.log("testtt3333")
-console.log("22222",rs)
-if(rs.type){
-  abp.notify.error("import fail")
-}
-else{
-  abp.notify.success("import successful")
-}
-     
-        this.dialogRef.close(true)
-       
-
+      this.dialogRef.close(true)
+      abp.notify.success("import successful")
     },
     (err)=>{
 
