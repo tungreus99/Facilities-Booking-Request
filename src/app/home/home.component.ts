@@ -56,7 +56,7 @@ export class HomeComponent extends AppComponentBase {
     this.getRequestist()
     this.getRequestByDate()
     this.allowMonthRequest = localStorage.getItem("requestTypeStatus") == "true" ? true : false
-    this.allowBookEvent = localStorage.getItem("clubMember") == "true" ? true : false
+    // this.allowBookEvent = localStorage.getItem("clubMember") == "true" ? true : false
   }
   getBackgroundByEvent(): string {
     switch (this.currentMonth) {

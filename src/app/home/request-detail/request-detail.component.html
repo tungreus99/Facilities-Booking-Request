@@ -1,8 +1,8 @@
-<section class="content px-2">
+<section class="content px-2" style="max-height: 90vh; overflow: auto;">
     <div class="container-fluid">
-        <h3>{{isViewDetail?'List of request detail':'Request list'}}</h3>
+        <h3>{{isViewDetail?'List of request detail':'Request detail'}}</h3>
         <div class="row">
-            <div class="col col-4 mr-2 card p-4 justify-content-between">
+            <div class=" col-md-4 col-sm-12  col-xs-12 mr-2 card p-4 justify-content-between">
                 <div class="form-group row">
                     <!-- <label for="" class="mt-2 mr-2">Request:</label>
                     <strong class="ml-2 mt-2" style="font-size: 1.2rem;">
@@ -37,7 +37,7 @@
                     </mat-form-field>
                 </div>
                 <div class="form-group">
-                    <label for="" class="pl-0 mt-1 mr-3 col-3">
+                    <label for="" class="pl-0 mt-1 mr-3 col-md-3 col-sm-6">
                         Book by club:
                     </label>
                     <mat-slide-toggle disabled="true" name="building" [(ngModel)]="request.bookedByClub" name="clubMember"
@@ -45,16 +45,14 @@
                 </div>
                 
             </div>
-            <div class="col col-7 card">
+            <div class="col col-md-7 col-sm-12 col-xs-12 card">
                 <div class="card-body" *ngIf="action=='view' || action =='view-detail' || action=='pdp-view'">
                     <mat-card class="pointer d-flex justify-content-between mt-2"
                         *ngFor="let detail of requestDetailList">
-                        <strong class=" ml-3">{{detail.useDate |date: "dd/MM/yyyy"}}</strong>
-                        <span> {{detail.timeUsing}}</span>
-                        <span>{{detail?.facility?.facilityName}}</span>
-                    <div class="w-25">
-                      
-                    </div>
+                        <strong class=" ml-3 text">{{detail.useDate |date: "dd/MM/yyyy"}}</strong>
+                        <span class="text"> {{detail.timeUsing}}</span>
+                        <span class="text">{{detail?.facility?.facilityName}}</span>
+                  
                        
 
                     </mat-card>
@@ -62,23 +60,19 @@
                 <div class="card-body" *ngIf="action=='create'">
 
                     <!-- <button class="btn btn-primary" (click)="addRequest()"> Add</button> -->
-
                     <mat-card *ngFor="let detail of requestDetailList"
                         class="pointer d-flex justify-content-between mt-3" style="cursor: default !important;">
-                        <strong class=""> {{detail.facility.facilityName}} </strong> <span style="height: fit-content;"
-                            class="badge badge-secondary mt-1">{{detail.timeUsing}} </span>
-                        <span> date: {{detail.useDate}} </span>
-
-                        <span> <i class="fas fa-times fa-2x"
+                        <strong class="text"> {{detail.facility.facilityName}} </strong> <span style="height: fit-content;"
+                            class="badge badge-secondary mt-1 text">{{detail.timeUsing}} </span>
+                        <span class="text"> date: {{detail.useDate}} </span>
+                        <span class="text"> <i class="fas fa-times fa-2x"
                                 (click)="remove(detail); $event.stopPropagation()"></i></span>
                     </mat-card>
                     <mat-card class="pointer d-flex justify-content-center mt-2" (click)="addRequest()">
                         <i class="fas fa-plus fa-2x text-primary"></i>
                     </mat-card>
                 </div>
-
             </div>
-
         </div>
         <button class="btn btn-primary float-right" *ngIf="action=='create'" [disabled]="!request.note || requestDetailList.length == 0" (click)="saveRequest()">Save</button>
         <button class="btn btn-danger float-right mr-2 " *ngIf="action=='create'" (click)="CancelAdd()">Cancel</button>

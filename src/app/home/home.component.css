@@ -5,7 +5,7 @@
   /* background: url("../../assets/img/FPT_AERIAL-01_20171109.jpg"); */
   background-position: center;
   background-size: cover;
-  height: 100vh ;
+  min-height: 100vh ;
 }
 .bg-orange{
   background: #F3950D;

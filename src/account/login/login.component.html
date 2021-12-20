@@ -64,9 +64,13 @@
       
     </div> -->
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" style="margin-top: 25px;">
-      <button mat-flat-button type="button"  color="primary" style="width: 100%" (click)="signInWithGoogle()">
+      <!-- <button mat-flat-button type="button"  color="primary" style="width: 100%" (click)="signInWithGoogle()">
           Log In With Google
-      </button>
+      </button> -->
+      <div>
+         
+        <a  (click)="signInWithGoogle(); $event.stopPropagation()" class="btn btn-danger row btn-block d-flex "><div class="col-1" style="padding-right: 28px; border-right: 1px white solid;"><i class="fab fa-google"></i> </div> <div class="col-10"> Login with <b>Google</b></div>  </a>
+      </div>
   </div>
   </form>
   <!-- <p  class="mb-1">
