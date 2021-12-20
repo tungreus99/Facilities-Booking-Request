@@ -12,7 +12,7 @@ export abstract class BaseApiService {
     protected baseUrl = "https://facilities-booking-server.herokuapp.com/"
     public httpOptions = {}
 
-    protected get rootUrl() {
+    protected get rootUrl() {   
         return this.baseUrl + this.changeUrl();
     }
 
