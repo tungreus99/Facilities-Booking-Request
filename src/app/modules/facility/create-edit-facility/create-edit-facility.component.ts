@@ -26,13 +26,10 @@ export class CreateEditFacilityComponent extends AppComponentBase implements OnI
   ngOnInit(): void {
     this.facility.building= false
     this.facility.available = false
-    console.log(this.facility)
-    if (this.data.id) {
-      this.facility = this.data
-    
+    if (this.data.facility.id) {
+      this.facility = this.data.facility
     }
     this.getAllBuilding()
-   console.log("test2",this.facility)
   }
 
   saveAndClose() {
@@ -46,7 +43,7 @@ export class CreateEditFacilityComponent extends AppComponentBase implements OnI
       else {
         this.facility.buildings = this.selectedBuilding
       }
-      if (!this.data.id) {
+      if (!this.data.facility.id) {
         this.icpdpService.AddFacility(this.facility).subscribe(rs => {
         }, (rs2) => {
           if(rs2.error?.text?.includes("existed")){
@@ -59,7 +56,7 @@ export class CreateEditFacilityComponent extends AppComponentBase implements OnI
         })
       }
       else {
-        this.icpdpService.UpdateFacility(this.facility, this.data.id).subscribe(rs => {
+        this.icpdpService.UpdateFacility(this.facility, this.data.facility.id).subscribe(rs => {
         }, (rs2) => {
           if(rs2.error?.text?.includes("existed")){
             abp.notify.error(rs2.error.text)
@@ -79,8 +76,7 @@ export class CreateEditFacilityComponent extends AppComponentBase implements OnI
   getAllBuilding() {
     this.icpdpService.getFacilityByBuilding().subscribe(data => {
       this.listBuilding = data
-       this.selectedBuilding = this.listBuilding?.filter(item=>item.facilityName == this.data?.buildings?.facilityName)[0]
-       console.log("sss",this.selectedBuilding)
+       this.selectedBuilding = this.listBuilding?.filter(item=>item.facilityName == this.data?.facility?.buildings?.facilityName)[0]
     
     },
     (err)=>{

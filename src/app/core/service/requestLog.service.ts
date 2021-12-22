@@ -19,6 +19,10 @@ export class RequestLogService extends BaseApiService {
   getAllListRqLog(): Observable<any> {
     return this.http.get(this.rootUrl + "getListRequestLog",this.httpOptions)
   }
+  getSRORqLog(): Observable<any> {
+    return this.http.get(this.rootUrl + "getRequest/false",this.httpOptions)
+  }
+  
   public handleError(error: any) {
     if (error.status == 401) {
       return throwError("401");

@@ -93,7 +93,7 @@
                       *ngFor="let item of requestList | paginate: { id:'pendingPaging', itemsPerPage: 5, currentPage: pendingPageNum }">
                       <mat-card>Create date: <strong>{{item.dateCreated | date:"dd/MM/yyyy"}} </strong>
                         <span
-                          [ngClass]="item.status=='PENDING'?'badge badge-pill badge-primary':item.status=='APPROVED'?'badge badge-pill badge-success':item.status=='REJECT'?'badge badge-pill badge-danger':''"
+                          [ngClass]="item.status=='PENDING'?'badge badge-pill badge-primary':item.status=='APPROVED'?'badge badge-pill badge-success':item.status=='REJECTED'?'badge badge-pill badge-danger':''"
                           class=" float-right">{{item.status}}</span>
                       </mat-card>
                     </p>

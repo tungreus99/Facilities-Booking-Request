@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
     this.getAllCount()
   }
   getAllCount() {
-    this.accountService.getAllAccount().subscribe((data) => {
+    this.accountService.getAllAccountStaff().subscribe((data) => {
       this.adminList = data;
       this.tempAdminList = data
     },

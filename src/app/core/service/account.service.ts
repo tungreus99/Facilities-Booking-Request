@@ -16,8 +16,11 @@ export class AccountService extends BaseApiService {
   changeUrl() {
     return 'api/icpdp/';
   }
-  getAllAccount(): Observable<any> {
+  getAllAccountStaff(): Observable<any> {
     return this.http.get(this.rootUrl + "ListAllStaffAccount",this.httpOptions)
+  }
+  getAllAccount(): Observable<any> {
+    return this.http.get(this.rootUrl + "ListAllAccount",this.httpOptions)
   }
   public handleError(error: any) {
     if (error.status == 401) {

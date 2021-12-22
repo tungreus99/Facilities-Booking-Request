@@ -26,8 +26,8 @@
                             <span> Create date: {{item.dateCreated | date:"dd/MM/yyyy"}}</span>
                             <div class="w-25 row justify-content-end col-sm-12 item">
                                 <span style="height: fit-content;" class="mt-2 px-3 py-1 mx-auto status" 
-                                    [ngClass]="item.status=='APPROVED'?'badge badge-pill badge-success':item.status=='REJECT'?'badge badge-pill badge-danger':item.status=='PENDING'?'badge badge-pill badge-primary':''">{{item.status=='REJECT'?'REJECTED':item.status}}</span>
-                                <button [disabled]="item.status=='APPROVED' || item.status == 'REJECT'" class="btn btn-danger float-right ml-2 btn-sm" (click)="deleteRequest(item); $event.stopPropagation()"><i class="fas fa-trash-alt mr-2"
+                                    [ngClass]="item.status=='APPROVED'?'badge badge-pill badge-success':item.status=='REJECTED'?'badge badge-pill badge-danger':item.status=='PENDING'?'badge badge-pill badge-primary':''">{{item.status=='REJECTED'?'REJECTED':item.status}}</span>
+                                <button [disabled]="item.status=='APPROVED' || item.status == 'REJECTED'" class="btn btn-danger float-right ml-2 btn-sm" (click)="deleteRequest(item); $event.stopPropagation()"><i class="fas fa-trash-alt mr-2"
                                         ></i>delete</button>
                             </div>
                         </div>

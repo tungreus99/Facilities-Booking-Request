@@ -26,6 +26,7 @@ export class RequestDetailComponent implements OnInit {
   listRemove = []
   requestBody = {} as RequestDto
   isViewDetail: boolean = false
+  isSaving:boolean = false
   constructor(@Inject(MAT_DIALOG_DATA) public data, public homeService: HomeService, private authenService: AuthenticateService,
     private pdpService: IcpdpService,
     public router: Router, private dialogRef: MatDialogRef<RequestDetailComponent>) {
@@ -85,7 +86,7 @@ export class RequestDetailComponent implements OnInit {
  
   rejectRequest() {
     this.requestBody.note = this.request.note
-    this.requestBody.status = "REJECT"
+    this.requestBody.status = "REJECTED"
     this.pdpService.updateRequest(this.requestBody.id, this.requestBody).subscribe(rs => { }, (err) => {
       if(err == "401"){
         this.router.navigate(["account/login"])
@@ -110,6 +111,7 @@ export class RequestDetailComponent implements OnInit {
     }
   }
   saveRequest() {
+    this.isSaving = true
     this.requestDetailList.forEach(item => {
       delete item["element"]
     })
@@ -130,8 +132,10 @@ export class RequestDetailComponent implements OnInit {
      
       this.dialogRef.close("success")
       this.homeService.requestListItem = []
+      this.isSaving = false
     },
       (err) => {
+        this.isSaving = false
         if(err == "401"){
           this.router.navigate(["account/login"])
         }

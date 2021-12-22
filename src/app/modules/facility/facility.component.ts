@@ -72,9 +72,14 @@ export class FacilityComponent implements OnInit {
         buildings: facility.buildings
       } as facitilyDto
     }
+    console.log("11111",item)
+
     let dialogRef = this.dialog.open(CreateEditFacilityComponent, {
       width: "800px",
-      data: item
+      data: {
+        facility :item,
+        isBuildingAllow: item.building
+      }
     })
     dialogRef.afterClosed().subscribe(rs => {
       if (rs) {

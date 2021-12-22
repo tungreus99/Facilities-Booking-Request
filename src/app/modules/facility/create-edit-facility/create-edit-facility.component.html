@@ -1,5 +1,5 @@
 <form class="form-horizontal" autocomplete="off" #facilityForm="ngForm">
-    <abp-modal-header [title]="!data?.id?'Add facility':'Edit facility'" (onCloseClick)="dialogRef.close()">
+    <abp-modal-header [title]="!data.facility?.id?'Add facility':'Edit facility'" (onCloseClick)="dialogRef.close()">
     </abp-modal-header>
     <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
         <div class="form-group row required">
@@ -20,7 +20,7 @@
                 Is building:
             </label>
             <div class="col-3">
-                <mat-slide-toggle name="building" [(ngModel)]="this.facility.building " class="mt-3"
+                <mat-slide-toggle [disabled]="data?.isBuildingAllow ==true" name="building" [(ngModel)]="this.facility.building " class="mt-3"
                     (change)="isSelectBuilding =!isSelectBuilding"> </mat-slide-toggle>
             </div>
             <label for="" class="mt-3 mr-3 col-3">

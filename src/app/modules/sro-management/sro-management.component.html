@@ -24,27 +24,7 @@
           (keyup.enter)="onChange()" />
       </div>
     </div>
-    <div class="row my-1">
-      <div class="col-1 mt-3">
-        <label> Request type:</label>
-      </div>
-      <div class="col-4">
-        <mat-form-field appearance="outline">
-          <mat-select [(ngModel)]="filterRequestType" (selectionChange)="onChange()">
-            <mat-option value="">
-              All
-            </mat-option>
-            <mat-option value="week">
-              week
-            </mat-option>
-            <mat-option value="Semester">
-              Semester
-            </mat-option>
-            <mat-option value="Event">Event</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
+   
   
     <div class="table-responsive">
   
@@ -55,7 +35,6 @@
             <th>Full Name</th>
             <th>Email</th>
             <th>Date created</th>
-            <th>Request type</th>
             <th>Change Type</th>
             <th>Status</th>
   
@@ -75,7 +54,6 @@
             <td> {{ request.account.fullName }}</td>
             <td>{{ request.account.email }}</td>
             <td>{{ request.request.dateCreated | date:"dd/MM/yyyy " }}</td>
-            <td>{{request.request.typeRequest}}</td>
             <td> <span> {{request.typeChange}}</span></td>
             <td>{{request.request.status}}</td>
             <td>{{ request.request.note }}</td>

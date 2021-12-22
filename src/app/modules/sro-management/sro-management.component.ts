@@ -27,7 +27,7 @@ export class SROManagementComponent implements OnInit {
 
   getAllRequestLog() {
     // this.isLoading = true
-    this.requestLogService.getAllListRqLog().subscribe((data) => {
+    this.requestLogService.getSRORqLog().subscribe((data) => {
       this.requestLogList = data;
       this.tempRequestLogList = data;
       this.isLoading = false

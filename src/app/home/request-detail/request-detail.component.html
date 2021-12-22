@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary float-right" *ngIf="action=='create'" [disabled]="!request.note || requestDetailList.length == 0" (click)="saveRequest()">Save</button>
+        <button class="btn btn-primary float-right" *ngIf="action=='create'" [disabled]="!request.note || requestDetailList.length == 0 || isSaving" (click)="saveRequest()">Save</button>
         <button class="btn btn-danger float-right mr-2 " *ngIf="action=='create'" (click)="CancelAdd()">Cancel</button>
         <button class="btn btn-default float-right" *ngIf="action=='view' || action == 'view-detail' || action=='pdp-view'" (click)="dialogRef.close()">Close</button>
         <button  class="btn btn-success mr-2 float-right" *ngIf="action=='pdp-view'" (click)="approveRequest()">Approve</button>
