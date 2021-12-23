@@ -76,7 +76,7 @@ export class CreateEditClubComponent
       if (rs) {
         let listToPush = rs.filter(account => !this.memberList.includes(account.id))
         this.memberList.push(...listToPush)
-        this.club.accounts = this.memberList
+        // this.club.accounts = this.memberList
         this.memberToEdit = listToPush
       }
     })

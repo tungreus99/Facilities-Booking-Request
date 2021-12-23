@@ -217,7 +217,7 @@ export class BookRequestComponent extends AppComponentBase implements OnInit {
       this.BookingRequestList = data,
 
         this.listDay = this.BookingRequestList[0].map((item, index) => {
-
+          //Ham gan them ngay vao cac thu
           return {
             day: this.convertDateToDay(new Date(moment(item.useDate).format("YYYY-MM-DD")).getDay()) + ` (${moment(item.useDate).format("DD/MM/YYYY")})`,
             date: moment(item.useDate).format("YYYY-MM-DD")
@@ -325,7 +325,9 @@ export class BookRequestComponent extends AppComponentBase implements OnInit {
   }
   checkSlot(time?, currentDay?: any) {
     if (time) {
+      //x la gio hien tai
       let x = (this.currentTime.split(" ")[0] + ":" + new Date().getMinutes() + " " + this.currentTime.split(" ")[1]).trim()
+      //currentslot chinh la gio chuyen vao
       let currentSlot = (time?.split("-")[0]).trim()
 
       if ((currentDay.split(" ")[0] == "Monday" || (currentDay.split(" ")[0] == "Tuesday" && this.currentTime < "5 PM")) && this.selectedWeek == 1 && currentDay.split(" ")[0] == this.currentDate) {
@@ -344,6 +346,7 @@ export class BookRequestComponent extends AppComponentBase implements OnInit {
     // }
     // return false
   }
+  //lay ra dinh dang 24h
   getTime24h(time) {
     return moment(time, 'hh:mm A').format('HH:mm')
   }

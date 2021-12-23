@@ -35,7 +35,6 @@
             <th>Full Name</th>
             <th>Email</th>
             <th>Date created</th>
-            <th>Change Type</th>
             <th>Status</th>
   
             <th>Note</th>
@@ -53,10 +52,9 @@
             <td>{{ i + 1 }}</td>
             <td> {{ request.account.fullName }}</td>
             <td>{{ request.account.email }}</td>
-            <td>{{ request.request.dateCreated | date:"dd/MM/yyyy " }}</td>
-            <td> <span> {{request.typeChange}}</span></td>
-            <td>{{request.request.status}}</td>
-            <td>{{ request.request.note }}</td>
+            <td>{{ request.dateCreated | date:"dd/MM/yyyy " }}</td>
+            <td>{{request.status}}</td>
+            <td>{{ request.note }}</td>
             <td>
               <button type="button" class="btn btn-danger mr-1 " matTooltip="Info about the action" (click)="deleteRequestLog(request)">
                 Delete
