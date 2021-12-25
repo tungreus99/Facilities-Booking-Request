@@ -28,12 +28,15 @@ export class IcpdpService extends BaseApiService {
   public getFacilityByBuilding(): Observable<any> {
     return this.http.get(this.baseUrl + `api/getFacilityByBuilding`, this.httpOptions)
   }
+
   public getRoomByBuilding(buildingId: string, bookByClub:boolean): Observable<any> {
     return this.http.get(this.baseUrl + `api/getRoomByBulding/${buildingId}/${bookByClub}`, this.httpOptions)
   }
+
   public getFacilityByName(facilityName: string): Observable<any> {
     return this.http.get(this.baseUrl + `api/getFacilityByName/${facilityName}`, this.httpOptions)
   }
+  
   public AddFacility(facility: facitilyDto): Observable<any> {
     return this.http.post(this.rootUrl + `/addFacility`, facility, this.httpOptions)
   }

@@ -33,6 +33,7 @@ export class LoginComponent extends AppComponentBase {
       this.loggedIn = (user != null);
       if (this.loggedIn && this.processLogin) {
         this.authenticateGoogle(this.user);
+        console.log(user)
       }
     });
   }

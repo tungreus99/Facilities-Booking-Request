@@ -34,7 +34,7 @@ export class ClubService extends BaseApiService {
     // }
     formData.append('file', file);
     const uploadReq = new HttpRequest(
-      'POST', this.baseUrl + 'api/upload', formData,
+      'POST', this.baseUrl + 'api/icpdp/upload', formData,
       {
         headers: new HttpHeaders({
           'Authorization': ("Bearer" + " " + localStorage.getItem("userToken")).trim(),
@@ -52,7 +52,7 @@ export class ClubService extends BaseApiService {
     // return null
   }
   exportClub(): Observable<any> {
-    return this.http.get(this.baseUrl + `api/exportClub`, this.httpOptions)
+    return this.http.get(this.baseUrl + `api/icpdp/exportClub`, this.httpOptions)
   }
   exportClubTemplate(): Observable<any> {
     return this.http.get(this.baseUrl + `api/exportClubTemplate`, this.httpOptions)

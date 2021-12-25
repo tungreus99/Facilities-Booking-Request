@@ -37,7 +37,7 @@ export class EventService extends BaseApiService {
     return this.http.request(uploadReq);
   }
   exportEvent(): Observable<any> {
-    return this.http.get(this.baseUrl + `api/exportEvent`, this.httpOptions)
+    return this.http.get(this.baseUrl + `api/icpdp/exportEvent`, this.httpOptions)
   }
   exportEventTemplate(): Observable<any> {
     return this.http.get(this.baseUrl + `api/icpdp/exportEventTemplate`, this.httpOptions)

@@ -31,7 +31,7 @@ export class FacilityService extends BaseApiService {
     // }
     formData.append('file', file);
     const uploadReq = new HttpRequest(
-      'POST', this.baseUrl + 'api/uploadEvent', formData,
+      'POST', this.baseUrl + 'api/icpdp/uploadFacility', formData,
       {
         headers: new HttpHeaders({
           'Authorization': ("Bearer" + " " + localStorage.getItem("userToken")).trim(),
@@ -48,7 +48,7 @@ export class FacilityService extends BaseApiService {
 
   }
   exportFacility(): Observable<any> {
-    return this.http.get(this.baseUrl + `api/exportFacility`, this.httpOptions)
+    return this.http.get(this.baseUrl + `api/icpdp/exportFacility`, this.httpOptions)
   }
   exportFacilityTemplate(): Observable<any> {
     return this.http.get(this.baseUrl + `api/exportFacilityTemplate`, this.httpOptions)
