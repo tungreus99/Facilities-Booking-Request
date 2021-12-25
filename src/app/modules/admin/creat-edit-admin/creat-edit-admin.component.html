@@ -9,15 +9,15 @@
                     required>
             </mat-form-field>
         </div>
-        <div class="form-group row">
+        <!-- <div class="form-group row">
             <label for="" class="mt-4 mr-3 col-2">Email :</label>
             <mat-form-field appearance="outline" class="col-8">
                 <input matInput name="email" type="email" class="form-control" [(ngModel)]="account.email" required >
             </mat-form-field>
-        </div>
+        </div> -->
         <div class="form-group row">
             <label for="" class="mt-4 mr-3 col-2">Role :</label>
-            <mat-radio-group class="mt-4" name="test" aria-label="Select an option" >
+            <mat-radio-group class="mt-4" name="test" aria-label="Select an option" [(ngModel)]="account.role" >
                 <mat-radio-button *ngFor="let item of roleList;  let i =index" (change)="onSelect($event)" [checked]="i==0" [value]="item.value" class="mr-3" >{{item.name}} </mat-radio-button>
             </mat-radio-group>
         </div>

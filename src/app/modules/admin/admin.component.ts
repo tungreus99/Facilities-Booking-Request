@@ -10,6 +10,7 @@ import { AdminService } from '@app/core/service/admin.service';
 import { IcpdpService } from '@app/core/service/icpdp.service';
 import { CreatEditAdminComponent } from './creat-edit-admin/creat-edit-admin.component';
 import { catchError } from 'rxjs/operators';
+import { AccountInfoComponent } from './account-info/account-info.component';
 
 @Component({
   selector: 'app-admin',
@@ -45,9 +46,10 @@ export class AdminComponent implements OnInit {
     let item = {};
     if (admin) {
       item = {
-        
+        id: admin.id,
         fullName: admin.fullName,
-        email: admin.email
+        email: admin.email,
+        role: admin.role
       } as AdminDto;
     }
     let dialogRef = this.dialog.open(CreatEditAdminComponent, {
@@ -60,6 +62,12 @@ export class AdminComponent implements OnInit {
       }
     });
    
+  }
+  viewDetail(account){
+    this.dialog.open(AccountInfoComponent,{
+      width: "800px",
+      data: account
+    })
   }
   deleteAccount(account){
     abp.message.confirm(
@@ -104,4 +112,5 @@ export class AdminComponent implements OnInit {
     })
 
   }
+  
 }

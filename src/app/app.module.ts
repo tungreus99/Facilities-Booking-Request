@@ -57,6 +57,7 @@ import { ClubListComponent } from './modules/admin/club-list/club-list.component
 import { EventListComponent } from './modules/admin/event-list/event-list.component';
 import { FacilityListComponent } from './modules/admin/facility-list/facility-list.component';
 import { SROManagementComponent } from './modules/sro-management/sro-management.component';
+import { AccountInfoComponent } from './modules/admin/account-info/account-info.component';
 // export function HttpLoaderFactory(http: HttpClient) {
 //   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 // }
@@ -107,6 +108,7 @@ import { SROManagementComponent } from './modules/sro-management/sro-management.
     EventListComponent,
     FacilityListComponent,
     SROManagementComponent,
+    AccountInfoComponent,
     
   
   ],

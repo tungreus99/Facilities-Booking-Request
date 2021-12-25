@@ -4,4 +4,5 @@ export class AdminDto {
     rememberMe: boolean
     fullName?: string
     role?: string
+    id:number
 }

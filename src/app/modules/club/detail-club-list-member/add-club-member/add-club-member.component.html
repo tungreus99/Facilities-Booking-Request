@@ -25,7 +25,7 @@
                         <mat-checkbox (change)="onselectMember(account,member)" #member></mat-checkbox>
                     </td>
                     <td class="text-center">{{account.fullName}}</td>
-                    <td class="text-center">{{account.email}}</td>
+                    <td class="text-center">{{account.email}}</td> 
                 </tbody>
             </table>
             <pagination-controls id="confirmPaging" (pageChange)="pageIndex = $event"></pagination-controls>

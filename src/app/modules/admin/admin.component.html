@@ -35,7 +35,7 @@
                     <th>Full Name</th>
                     <th>Email</th>
                     <th>Role</th>
-                    <th style="width: 100px">action</th>
+                    <th style="width: 250px">action</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,7 +48,11 @@
                     <td> {{ admin.fullName }}</td>
                     <td>{{admin.email}}</td>
                     <td class="text-center">{{admin.role}}</td>
-                    <td><button class="btn btn-danger" (click)="deleteAccount(admin)">delete</button></td>
+                    <td class="text-center" style="width: 250px;">
+                        <button class="btn btn-primary mr-1" (click)="opendialog(admin)">Edit</button>
+                        <button class="btn btn-danger mr-1" (click)="deleteAccount(admin)">Delete</button>
+                        <button class="btn btn-success" (click)="viewDetail(admin)">Detail</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

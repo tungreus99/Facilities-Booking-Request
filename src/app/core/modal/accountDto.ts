@@ -4,4 +4,5 @@ export class AccountDto {
     rememberMe: boolean
     fullName?: string
     role?: string
+    id:number
 }

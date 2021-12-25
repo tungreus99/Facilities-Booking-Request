@@ -1,4 +1,4 @@
-<div [@routerTransition] class="bg">
+<div [@routerTransition] class="bg" [ngStyle]="{'background': backgroundImg, 'background-position': 'center', 'background-size': 'cover'}"> 
   <!-- <section class="content-header">
       <div class="container-fluid">
         <div class="row">
@@ -47,6 +47,7 @@
                       <p>{{request.note}}</p>
                     </mat-expansion-panel>
                   </mat-accordion>
+                  <h2 class="text-center text-danger" *ngIf="listPendingRequest.length == 0">No data</h2>
                   
                 </div>
                 <pagination-controls id="paging" (pageChange)="p = $event"></pagination-controls>
@@ -96,9 +97,14 @@
               
               <div class="w-80">
                 <div class="text-danger row book-by-month">
+                  <label class="mr-2 ml-1" for="" style="font-size: 20px; color: white;">Reset request event count: </label>
+                  <button class="btn btn-success btn-sm" (click)="resetEventCount()">Reset</button>
+                </div>
+                <div class="text-danger row book-by-month">
                   <label class="mr-2 ml-1" for="" style="font-size: 20px; color: white;">Allow to book by semester: </label>
                   <mat-slide-toggle class="mt-1 " name="available" (change)="setRequestTypeStatus()" [(ngModel)]="allowSendMonthRequest"></mat-slide-toggle>
                 </div>
+               
               </div>
             </div>
           </div>

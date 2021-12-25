@@ -73,7 +73,6 @@ export class BookRequestComponent extends AppComponentBase implements OnInit {
 
  
   onBuidingChange() {
-    this.isBookByRoom = false
     this.isRoomSelect = true
     this.getRoomByBuiding()
     this.selectedWeek = 1
@@ -84,8 +83,7 @@ export class BookRequestComponent extends AppComponentBase implements OnInit {
     }
     this.isNotforPerson = this.selectedBuildingName.notForPersonal
     this.disableBooking()
-
-
+console.log("11111111", this.selectedBuildingName)
   }
   onBookByClubChange(e) {
     if (e.checked == true) {
@@ -214,15 +212,9 @@ export class BookRequestComponent extends AppComponentBase implements OnInit {
   getRequestByRoom(id) {
     this.isLoading = true
     this.homeService.getRequestDetailByFacility(id).subscribe(data => {
-      this.BookingRequestList = data,
+      this.BookingRequestList = data
 
-        this.listDay = this.BookingRequestList[0].map((item, index) => {
-          //Ham gan them ngay vao cac thu
-          return {
-            day: this.convertDateToDay(new Date(moment(item.useDate).format("YYYY-MM-DD")).getDay()) + ` (${moment(item.useDate).format("DD/MM/YYYY")})`,
-            date: moment(item.useDate).format("YYYY-MM-DD")
-          }
-        })
+   
       switch (this.selectedWeek) {
         case 1:
           this.listDay = this.BookingRequestList[0].map(item => {

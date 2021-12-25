@@ -24,6 +24,10 @@ export class CreatEditAdminComponent extends AppComponentBase  implements OnInit
      }
 
   ngOnInit(): void {
+    if(this.data.id){
+      this.account = this.data
+      console.log("tesesa", this.account)
+    }
   
   }
   onSelect(e){
@@ -49,6 +53,23 @@ export class CreatEditAdminComponent extends AppComponentBase  implements OnInit
         }
       );
     } 
+    else{
+
+      this.adminService.updateAccount(this.account,this.account.id).subscribe(
+        (rs) => {
+          abp.notify.success(`updated Account ${this.account.fullName}`);
+          this.dialogRef.close(this.account);
+        },
+        (err) => {
+          if(err == "401"){
+            this.router.navigate(["account/login"])
+          }
+         
+         
+        }
+      );
+
+    }
   }
 }
 

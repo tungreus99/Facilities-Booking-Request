@@ -36,6 +36,7 @@ export class ImportClubComponent implements OnInit {
     this.clubService.UpdateFileClub(this.selectedFiles).subscribe(rs=>{
       this.dialogRef.close(true)
       abp.notify.success("import successful")
+      console.log("aaaaaaaaaaaaa",rs)
       
     },
     (err)=>{

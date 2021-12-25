@@ -120,4 +120,9 @@ export class IcpdpService extends BaseApiService {
     
   }
 
+  SetEventCount(): Observable<any> {
+    return this.http.put(this.rootUrl + `/SetEventCount/`, {}, this.httpOptions)
+
+  }
+
 }
