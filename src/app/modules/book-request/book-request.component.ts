@@ -121,7 +121,6 @@ console.log("11111111", this.selectedBuildingName)
       element: e,
       note:this.tempNote
     }
-    console.log("test", item)
     let ref = this.dialog.open(RequestDetailComponent, {
       width: "80vw",
       data: {
@@ -130,6 +129,7 @@ console.log("11111111", this.selectedBuildingName)
         request: item,
         bookByClub: this.bookByClub
       },
+      disableClose: true
     })
 
     ref.afterClosed().subscribe(rs => {

@@ -38,36 +38,7 @@ export class LoginComponent extends AppComponentBase {
     });
   }
 
-  login(): void {
 
-    this.authenService.login().subscribe(rs => {
-      if (rs.role == 'ROLE_STUDENT' || rs.role == 'ROLE_ADMIN') {
-        this.router.navigate(["app/home"])
-      }
-      else {
-        this.router.navigate(["app/manage-request"])
-      }
-      this.authenService.userRole = rs.role
-      this.authenService.userId = rs.id
-      this.authenService.clubMember = rs.clubmember
-      this.authenService.setToken(rs.jwtToken)
-      this.authenService.requestTypeStatus = rs.requestTypeStatus
-
-
-      localStorage.setItem("userName", rs.userName)
-      localStorage.setItem("userToken", rs.jwtToken)
-      localStorage.setItem("userId", rs.id)
-      localStorage.setItem("requestTypeStatus", rs.requestTypeStatus)
-      localStorage.setItem("clubMember", rs.clubmember)
-      localStorage.setItem("eventmember", rs.eventmember)
-      localStorage.setItem("userRole", rs.role)
-      localStorage.setItem("accountName", rs.fullName)
-      this.processLogin = false
-    },
-      () => {
-        this.router.navigate(["account/login"])
-      })
-  }
   signInWithGoogle() {
     this.processLogin = true
     this.googleAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);

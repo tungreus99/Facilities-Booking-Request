@@ -51,7 +51,7 @@ export class RequestDetailComponent implements OnInit {
   }
   // 
   getRequestDetail() {
-    if (this.action == 'view-detail' || this.action == 'pdp-view') {
+    if (this.action == 'view-detail' || this.action == 'pdp-view') { 
       this.homeService.getRequestDetail(this.data.request.id).subscribe(data => {
         this.requestDetailList = data.requestDetails
         this.selectedType = data.typeRequest
@@ -159,9 +159,10 @@ export class RequestDetailComponent implements OnInit {
     this.homeService.requestListItem = this.requestDetailList
     this.listRemove.push(request.element)
   }
+  
   ngOnDestroy(): void {
     if (!this.isSubmited && !this.isAdd) {
-      this.homeService.requestListItem.splice(this.homeService.requestListItem.indexOf(this.tempRequest), 1)
+      // this.homeService.requestListItem.splice(this.homeService.requestListItem.indexOf(this.tempRequest), 1)
     }
   }
   CancelAdd() {
