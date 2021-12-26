@@ -67,7 +67,7 @@ export class BookRequestComponent extends AppComponentBase implements OnInit {
     this.currentDate = this.convertDateToDay(this.currentDate)
 
     // this.currentDate = "Monday"   ----- đổi thứ
-    this.currentTime = "12 AM"    
+    // this.currentTime = "12 AM"    
     //  ----- đổi giờ (định dạng 3 AM, 4 PM, 5 PM ...)
     this.disableBooking()
   }
