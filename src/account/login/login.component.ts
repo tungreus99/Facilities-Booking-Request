@@ -78,8 +78,9 @@ export class LoginComponent extends AppComponentBase {
 
       this.processLogin = false
     },
-      () => {
+      (err) => {
         this.router.navigate(["account/login"])
+        abp.notify.error(err.error)
       })
   }
 

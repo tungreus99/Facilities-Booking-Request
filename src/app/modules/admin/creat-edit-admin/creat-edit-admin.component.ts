@@ -61,8 +61,13 @@ export class CreatEditAdminComponent extends AppComponentBase  implements OnInit
           this.dialogRef.close(this.account);
         },
         (err) => {
+          
           if(err == "401"){
             this.router.navigate(["account/login"])
+          }
+          else{
+            abp.notify.success(`updated Account ${this.account.fullName}`);
+            this.dialogRef.close(this.account);
           }
          
          

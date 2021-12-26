@@ -27,9 +27,7 @@ export class AppComponent extends AppComponentBase implements OnInit {
       this.authenService.setToken(localStorage.getItem("userToken"))
       
     }
-    if(localStorage.getItem("requestTypeStatus")){
-      this.authenService.requestTypeStatus = localStorage.getItem("requestTypeStatus")
-    }
+   
     if(localStorage.getItem("clubMember")){
       this.authenService.clubMember = localStorage.getItem("clubMember")=='true'?true:false
     }
@@ -42,12 +40,21 @@ export class AppComponent extends AppComponentBase implements OnInit {
     if(localStorage.getItem("eventmember")){
       this.authenService.eventMember = localStorage.getItem("eventmember")=="true"?true:false
     }
+    if(localStorage.getItem("requestTypeStatus")){
+      this.authenService.requestTypeStatus = localStorage.getItem("requestTypeStatus") == "true"?true:false
+    }
     this.pdpService.getEventClubRequest(this.authenService.userName ).subscribe(rs=>{
-      this.authenService.clubMember = rs.clubStatus
-      this.authenService.eventMember = rs.eventStatus
+      localStorage.setItem("requestTypeStatus", rs.requestTypeStatus)
       localStorage.setItem("eventmember", rs.eventStatus)
       localStorage.setItem("clubMember", rs.clubStatus)
+      this.authenService.clubMember = rs.clubStatus
+      this.authenService.eventMember = rs.eventStatus
+      this.authenService.requestTypeStatus = rs.requestTypeStatus
+      console.log( this.authenService.requestTypeStatus )
+  
+
     })
+   
 
     
     this.renderer.addClass(document.body, 'sidebar-mini');

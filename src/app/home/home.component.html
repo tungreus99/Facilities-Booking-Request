@@ -26,7 +26,7 @@
                 <div class="w-80" *ngIf="authenService.clubMember ">
                   <div class="small-box ">
   
-                    <button class="btn btn-primary w-100 text-left bg-orange special" [disabled]="!allowMonthRequest  "
+                    <button class="btn btn-primary w-100 text-left bg-orange special" [disabled]="allowMonthRequest ==false  "
                       (click)="createRequest('Semester')">
                       Create booking request for a Semester
                       <i class="fas fa-plus fa-lg float-right mt-2"></i>
@@ -109,7 +109,7 @@
                     <p
                       *ngFor="let item of requestListByDate  | paginate: { id:'confirmPaging', itemsPerPage: 3, currentPage: confirmPagNum }">
                       <mat-card  >
-                        <span style="font-size: 1rem;" class="text-danger ml-3">Bạn có muốn sử dụng {{item.facility.facilityName}} vào {{item.timeUsing}} ngày {{item.useDate | date:"dd/MM/yyyy"}}</span>
+                        <span style="font-size: 1rem;" class="text-danger ml-3">Do you want to use {{item.facility.facilityName}} to enter {{item.timeUsing}} day {{item.useDate | date:"dd/MM/yyyy"}}</span>
                         <button class="btn btn-success float-right btn-sm " (click)="$event.stopPropagation(); ConfirmRequest(item)">Yes</button>
                         <button class="btn btn-danger float-right btn-sm mr-2" (click)="$event.stopPropagation(); closeRequest(item)">No</button>
                       </mat-card>

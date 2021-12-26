@@ -40,7 +40,6 @@ import { AccountFooterComponent } from './layout/account-footer.component';
             providers: [
               {
                 id: GoogleLoginProvider.PROVIDER_ID,
-                // provider: new GoogleLoginProvider('383904693502-irfatk6brc55lt0lvle8i5abn0cf19qe.apps.googleusercontent.com')
                 provider: new GoogleLoginProvider('383904693502-3tqm80gd3oq4qoq06dpl9fevvrt33h0d.apps.googleusercontent.com')
 
               },

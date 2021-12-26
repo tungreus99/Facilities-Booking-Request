@@ -135,17 +135,26 @@ export class RequestDetailComponent implements OnInit {
       this.isSaving = false
     },
       (err) => {
-        this.isSaving = false
-        if(err == "401"){
-          this.router.navigate(["account/login"])
-        }
-        else{
-          this.isSubmited = true
-          abp.notify.success("add request successfull")
-          this.dialogRef.close("success")
-          this.homeService.requestListItem = []
+      console.log("rs",err)
+        if(err.error.text.includes("2 times")){
+          abp.notify.error(err.error.text)
+          this.dialogRef.close()
 
         }
+        else{
+          if(err == "401"){
+            this.router.navigate(["account/login"])
+          }
+          else{
+            this.isSubmited = true
+            abp.notify.success("add request successfull")
+            this.dialogRef.close("success")
+            this.homeService.requestListItem = []
+  
+          }
+        }
+        this.isSaving = false
+      
       
       })
   }

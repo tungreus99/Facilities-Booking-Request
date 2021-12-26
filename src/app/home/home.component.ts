@@ -10,6 +10,7 @@ import { AppComponentBase } from '@shared/app-component-base';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import * as moment from 'moment';
 import { catchError } from 'rxjs/operators';
+import { IcpdpService } from '@app/core/service/icpdp.service';
 
 @Component({
   templateUrl: './home.component.html',
@@ -47,7 +48,8 @@ export class HomeComponent extends AppComponentBase {
   allowMonthRequest: boolean = false
   allowBookEvent: boolean = false
   currentMonth: number = new Date().getMonth()
-  constructor(injector: Injector, private homeService: HomeService, private dialog: MatDialog, private router: Router, public authenService: AuthenticateService) {
+  constructor(injector: Injector, private homeService: HomeService, private dialog: MatDialog, private router: Router, private pdpService: IcpdpService,
+     public authenService: AuthenticateService) {
     super(injector);
     authenService.userId = Number(localStorage.getItem("userId"))
   }
@@ -55,8 +57,15 @@ export class HomeComponent extends AppComponentBase {
     this.backgroundImg = this.listBackground.find(item => item.event == this.getBackgroundByEvent()).url
     this.getRequestist()
     this.getRequestByDate()
-    this.allowMonthRequest = localStorage.getItem("requestTypeStatus") == "true" ? true : false
+    
     // this.allowBookEvent = localStorage.getItem("clubMember") == "true" ? true : false
+    this.pdpService.getEventClubRequest(this.authenService.userName ).subscribe(rs=>{
+     
+      this.allowMonthRequest = rs.requestTypeStatus
+      
+  
+
+    })
   }
   getBackgroundByEvent(): string {
     switch (this.currentMonth) {
@@ -113,9 +122,9 @@ export class HomeComponent extends AppComponentBase {
   }
   ConfirmRequest(request) {
     let message: string = ""
-    message = `${request.facility.facilityName} vào ${request.timeUsing} ngày ${moment(request.useDate).format("DD/MM/YYYY")}`
+    message = `${request.facility.facilityName} to enter ${request.timeUsing} day ${moment(request.useDate).format("DD/MM/YYYY")}`
     abp.message.confirm(
-      `bạn có muốn xác nhận sử dụng facility ${message}    ?  `,
+      `Do you want to confirm using facility ${message}    ?  `,
       "",
       (result: boolean) => {
         if (result) {
@@ -161,9 +170,9 @@ export class HomeComponent extends AppComponentBase {
   closeRequest(request) {
 
     let message: string = ""
-    message = `${request.facility.facilityName} vào ${request.timeUsing} ngày ${moment(request.useDate).format("DD/MM/YYYY")}`
+    message = `${request.facility.facilityName} to enter ${request.timeUsing} day ${moment(request.useDate).format("DD/MM/YYYY")}`
     abp.message.confirm(
-      `bạn có muốn hủy request ${message}    ?  `,
+      `Do you want to cancel the request? ${message}    ?  `,
       "",
       (result: boolean) => {
         if (result) {

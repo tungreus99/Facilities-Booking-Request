@@ -25,7 +25,7 @@ export class AdminService extends BaseApiService {
     delete account["id"]
     delete account["email"]
 
-    return this.http.post(this.baseUrl + `api/icpdp/updateAccount/${id}`, account, this.httpOptions)
+    return this.http.put(this.baseUrl + `api/icpdp/updateAccount/${id}`, account, this.httpOptions)
   }
   accountDetail(account): Observable<any> {
     return this.http.get(this.baseUrl + `api/icpdp/accountDetail/${account.id}`, this.httpOptions)
