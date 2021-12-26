@@ -85,7 +85,7 @@ export class CreateEditEventComponent extends AppComponentBase implements OnInit
   addEventMember() {
     let ref = this.dialog.open(AddEventMemberComponent, {
       width: "80vw",
-      data: this.data,
+      data: this.data.id ? this.data : {accounts:  this.memberList},
       height: "80vh"
     })
     ref.afterClosed().subscribe(rs => {

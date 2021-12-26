@@ -36,15 +36,15 @@ export class CreateEditClubComponent
     }
   }
   saveAndClose() {
-    this.club.clubName= this.club.clubName.trim()
+    this.club.clubName = this.club.clubName.trim()
     if (!this.data.id) {
       this.icpdpService.AddClub(this.club).subscribe(
         (rs) => { },
         (rs2) => {
-          if(rs2.error?.text?.includes("existed")){
+          if (rs2.error?.text?.includes("existed")) {
             abp.notify.error(rs2.error.text)
           }
-          else{
+          else {
             abp.notify.success(`Added new club ${this.club.clubName}`);
             this.dialogRef.close(this.club);
           }
@@ -55,10 +55,10 @@ export class CreateEditClubComponent
       this.icpdpService.UpdateClub(this.club, this.data.id).subscribe(
         (rs) => { },
         (rs2) => {
-          if(rs2.error?.text?.includes("existed")){
+          if (rs2.error?.text?.includes("existed")) {
             abp.notify.error(rs2.error.text)
           }
-          else{
+          else {
             abp.notify.success(`updated club ${this.club.clubName}`);
             this.dialogRef.close(this.club);
           }
@@ -69,14 +69,14 @@ export class CreateEditClubComponent
   addClubMembet() {
     let ref = this.dialog.open(AddClubMemberComponent, {
       width: "80vw",
-      data: this.data,
+      data: this.data.id ? this.data : {accounts:  this.memberList},
       height: "80vh"
     })
     ref.afterClosed().subscribe(rs => {
       if (rs) {
         let listToPush = rs.filter(account => !this.memberList.includes(account.id))
         this.memberList.push(...listToPush)
-        // this.club.accounts = this.memberList
+        this.club.accounts = this.memberList
         this.memberToEdit = listToPush
       }
     })

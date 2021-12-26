@@ -112,7 +112,7 @@
                                     <td *ngFor="let day of listDay; let j =index ">
                                         <ng-container *ngIf="!isViewTable && fillToTimeTable(slot.slot,day?.day,i).statusName !='Busy' && fillToTimeTable(slot.slot,day?.day,i).statusName !='Pending' ">
                                             <button class="btn" (click)="addBooking(slot.slot,day, btn)" #btn
-                                            [disabled]="(!allowBooking || (day?.day.includes('Monday') && currentDate=='Tuesday' && selectedWeek==1)  ) && requestType!='Semester' || checkSlot(slot.time, day?.day) || (slot.slot != 'slot 7' && slot.slot != 'slot 8' &&  isBookByRoom == true ) "
+                                            [disabled]="(!allowBooking || (day?.day.includes('Monday') && currentDate=='Tuesday' && selectedWeek==1)  ) && requestType!='Semester' || checkSlot(slot.time, day?.day) || (slot.slot != 'slot 7' && slot.slot != 'slot 8' &&  isBookByRoom == true || !day?.day.includes('Monday') ) "
                                             *ngIf="(selectedRoom || selectedBuildingName ) && fillToTimeTable(slot.slot,day?.day).statusName == ''  ">
                                             <i class="fas fa-plus text-primary fa-lg"></i>
                                         </button>
@@ -126,7 +126,6 @@
                                             <p style="line-height: 10px; color: black;" *ngIf="isClubMember == true || isEventMember==true">
                                                 {{fillToTimeTable(slot.slot,day?.day,i).author}}
                                             </p>
-                                            
                                     </td>
                                 </tr>
                             </tbody>
